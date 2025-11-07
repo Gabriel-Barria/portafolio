@@ -1,19 +1,10 @@
 ﻿version: '3.8'
 
 services:
-  dev:
+  portfolio:
     build:
       context: .
-      target: builder
+    container_name: portfolio-web
     ports:
-      - "3001:3000"
-    volumes:
-      - .:/app
-      - /app/node_modules
-    command: npm run dev
-
-  prod:
-    build:
-      context: .
-    ports:
-      - "8080:80"
+      - "3002:80"
+    restart: unless-stopped

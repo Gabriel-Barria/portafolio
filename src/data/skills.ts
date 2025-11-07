@@ -1,1 +1,0 @@
-﻿export const skills = [{category: "Frontend", items: ["React", "TypeScript", "Tailwind CSS", "Astro"]},{category: "Backend", items: ["Node.js", "Express", "Python", "PostgreSQL"]},{category: "DevOps", items: ["Docker", "Git", "Nginx", "Linux"]}];
