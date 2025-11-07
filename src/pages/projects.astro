@@ -1,0 +1,22 @@
+﻿---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { projects } from '../data/projects';
+---
+<Layout title="Proyectos">
+  <Header slot="header" />
+  <div class="container mx-auto px-4 py-20">
+    <h1 class="text-4xl font-bold mb-8">Proyectos API</h1>
+    <div class="grid md:grid-cols-2 gap-8">
+      {projects.map(project => (
+        <div class="card">
+          <h2 class="text-2xl font-bold mb-2">{project.title}</h2>
+          <p class="text-gray-600 dark:text-gray-400 mb-4">{project.description}</p>
+          <code class="text-sm bg-gray-100 dark:bg-gray-800 p-2 rounded">{project.method} {project.api}</code>
+        </div>
+      ))}
+    </div>
+  </div>
+  <Footer slot="footer" />
+</Layout>
