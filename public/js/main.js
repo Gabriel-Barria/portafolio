@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeThemeToggle();
     initializeTypingEffect();
     initializeScrollAnimations();
-    initializeProjects();
+    initializeMiniProjects(); // Updated to use mini projects
     initializeContactForm();
     initializeBackToTop();
 });
@@ -199,128 +199,6 @@ function initializeScrollAnimations() {
     }, observerOptions);
 
     skillBars.forEach(bar => observer.observe(bar));
-}
-
-// ===================================
-// Projects
-// ===================================
-function initializeProjects() {
-    const projects = [
-        {
-            id: 1,
-            title: 'E-Commerce Platform',
-            category: 'web',
-            description: 'Plataforma de comercio electrónico completa con carrito de compras, pagos integrados y panel administrativo.',
-            tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-            icon: 'fas fa-shopping-cart',
-            demo: '#',
-            code: 'https://github.com'
-        },
-        {
-            id: 2,
-            title: 'Task Management App',
-            category: 'mobile',
-            description: 'Aplicación móvil para gestión de tareas con sincronización en tiempo real y notificaciones push.',
-            tags: ['React Native', 'Firebase', 'Redux'],
-            icon: 'fas fa-tasks',
-            demo: '#',
-            code: 'https://github.com'
-        },
-        {
-            id: 3,
-            title: 'Weather API Service',
-            category: 'api',
-            description: 'API RESTful para datos meteorológicos con cacheo, rate limiting y documentación interactiva.',
-            tags: ['Node.js', 'Express', 'Redis', 'Swagger'],
-            icon: 'fas fa-cloud-sun',
-            demo: '#',
-            code: 'https://github.com'
-        },
-        {
-            id: 4,
-            title: 'Blog CMS',
-            category: 'web',
-            description: 'Sistema de gestión de contenidos para blogs con editor WYSIWYG y SEO optimizado.',
-            tags: ['Next.js', 'PostgreSQL', 'Prisma'],
-            icon: 'fas fa-blog',
-            demo: '#',
-            code: 'https://github.com'
-        },
-        {
-            id: 5,
-            title: 'Fitness Tracker',
-            category: 'mobile',
-            description: 'App de seguimiento de ejercicios con gráficos de progreso y planes de entrenamiento personalizados.',
-            tags: ['Flutter', 'Dart', 'SQLite'],
-            icon: 'fas fa-dumbbell',
-            demo: '#',
-            code: 'https://github.com'
-        },
-        {
-            id: 6,
-            title: 'Payment Gateway Integration',
-            category: 'api',
-            description: 'Microservicio de integración con múltiples pasarelas de pago con manejo de webhooks.',
-            tags: ['Python', 'FastAPI', 'Docker'],
-            icon: 'fas fa-credit-card',
-            demo: '#',
-            code: 'https://github.com'
-        }
-    ];
-
-    const projectsGrid = document.getElementById('projectsGrid');
-    const filterButtons = document.querySelectorAll('.filter-btn');
-
-    // Render all projects initially
-    renderProjects(projects);
-
-    // Filter functionality
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            // Update active state
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-
-            // Filter projects
-            const filterValue = button.getAttribute('data-filter');
-            const filteredProjects = filterValue === 'all' 
-                ? projects 
-                : projects.filter(p => p.category === filterValue);
-            
-            // Animate out
-            projectsGrid.style.opacity = '0';
-            setTimeout(() => {
-                renderProjects(filteredProjects);
-                projectsGrid.style.opacity = '1';
-            }, 300);
-        });
-    });
-
-    function renderProjects(projectsToRender) {
-        projectsGrid.innerHTML = projectsToRender.map(project => `
-            <div class="project-card" data-category="${project.category}">
-                <div class="project-image">
-                    <i class="${project.icon}"></i>
-                </div>
-                <div class="project-content">
-                    <span class="project-category">${project.category}</span>
-                    <h3 class="project-title">${project.title}</h3>
-                    <p class="project-description">${project.description}</p>
-                    <div class="project-tags">
-                        ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
-                    </div>
-                    <div class="project-links">
-                        <a href="${project.demo}" class="project-link project-link-demo" target="_blank">
-                            <i class="fas fa-external-link-alt"></i> Demo
-                        </a>
-                        <a href="${project.code}" class="project-link project-link-code" target="_blank">
-                            <i class="fab fa-github"></i> Code
-                        </a>
-                    </div>
-                </div>
-            </div>
-        `).join('');
-    }
 }
 
 // ===================================

@@ -1,10 +1,10 @@
-﻿version: '3.8'
-
 services:
-  portfolio:
+  portfolio-dev:
     build:
       context: .
-    container_name: portfolio-web
+    container_name: portfolio-dev
     ports:
       - "3002:80"
+    volumes:
+      - ./public:/usr/share/nginx/html:ro
     restart: unless-stopped

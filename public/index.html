@@ -7,6 +7,7 @@
     <meta name="author" content="Gabriel Barría">
     <title>Gabriel Barría - Full Stack Developer</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/mini-projects.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -14,7 +15,7 @@
     <nav class="navbar" id="navbar">
         <div class="container">
             <div class="nav-brand">
-                <a href="#home">GB<span>.</span></a>
+                <a href="#home">GIBZ<span>.</span></a>
             </div>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
                 <span></span>
@@ -302,9 +303,11 @@
             </div>
             <div class="projects-filter">
                 <button class="filter-btn active" data-filter="all">Todos</button>
-                <button class="filter-btn" data-filter="web">Web Apps</button>
-                <button class="filter-btn" data-filter="mobile">Mobile</button>
-                <button class="filter-btn" data-filter="api">APIs</button>
+                <button class="filter-btn" data-filter="tools">Herramientas</button>
+                <button class="filter-btn" data-filter="productivity">Productividad</button>
+                <button class="filter-btn" data-filter="games">Juegos</button>
+                <button class="filter-btn" data-filter="design">Diseño</button>
+                <button class="filter-btn" data-filter="health">Salud</button>
             </div>
             <div class="projects-grid" id="projectsGrid">
                 <!-- Projects will be loaded dynamically via JS -->
@@ -428,6 +431,22 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
+    <!-- Mini Projects Modal -->
+    <div class="project-modal" id="projectModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Proyecto</h3>
+                <button class="modal-close" onclick="closeModal()" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Project content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
     <script src="js/main.js"></script>
+    <script src="js/mini-projects.js"></script>
 </body>
 </html>

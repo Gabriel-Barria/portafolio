@@ -896,9 +896,15 @@ button {
 
 .footer-content {
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr;
+    grid-template-columns: 1.5fr 2fr;
     gap: 3rem;
     margin-bottom: 2rem;
+}
+
+.footer-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
 }
 
 .footer-brand h3 {
@@ -1001,6 +1007,11 @@ button {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
+    
+    .footer-links {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1069,5 +1080,10 @@ button {
     
     .image-placeholder {
         font-size: 5rem;
+    }
+    
+    .footer-links {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 }
