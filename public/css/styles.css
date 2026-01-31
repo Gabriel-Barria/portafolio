@@ -1377,6 +1377,10 @@ body.chat-active .back-to-top {
         display: none;
     }
 
+    #heroExpandBtn {
+        display: none;
+    }
+
     .hero-content {
         gap: 1.5rem;
     }
