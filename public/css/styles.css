@@ -1545,6 +1545,10 @@ body.chat-active .back-to-top {
     }
 
     /* Contact Section Mobile */
+    .contact-section .section-header {
+        display: none;
+    }
+
     .contact-robot-container {
         gap: 1rem;
     }
