@@ -83,6 +83,11 @@ function initializeChatWidget() {
         isOpen = true;
         widget.classList.add('open');
 
+        // Activar FAB para que quede visible después de cerrar
+        if (!widget.classList.contains('fab-activated')) {
+            widget.classList.add('fab-activated');
+        }
+
         if (!hasGreeted) {
             showGreeting();
             hasGreeted = true;

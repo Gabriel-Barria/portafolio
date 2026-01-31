@@ -42,10 +42,115 @@
 }
 
 /* ===================================
-   Botón Flotante (FAB) - Oculto, se usa robot de contacto
+   Botón Flotante (FAB)
    =================================== */
 .chat-fab {
-    display: none; /* Oculto - el robot de contacto ofrece esta opción */
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--chat-gradient);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--chat-shadow-fab);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    /* Oculto por defecto - se activa después de abrir chat */
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0);
+}
+
+/* FAB visible después de activar el chat */
+.chat-widget.fab-activated .chat-fab {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.chat-fab::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.3s ease;
+}
+
+.chat-fab:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.5);
+}
+
+.chat-fab:hover::before {
+    transform: scale(1);
+}
+
+.chat-fab:active {
+    transform: scale(0.95);
+}
+
+.chat-fab i {
+    font-size: 1.5rem;
+    color: white;
+    transition: all 0.3s ease;
+    position: absolute;
+}
+
+.chat-fab .fa-comments {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+}
+
+.chat-fab .fa-times {
+    opacity: 0;
+    transform: scale(0) rotate(-90deg);
+}
+
+/* FAB cuando chat está abierto */
+.chat-widget.open .chat-fab .fa-comments {
+    opacity: 0;
+    transform: scale(0) rotate(90deg);
+}
+
+.chat-widget.open .chat-fab .fa-times {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+}
+
+/* Badge de notificación - oculto */
+.chat-fab-badge {
+    display: none;
+}
+
+/* Efecto pulse del FAB */
+.chat-widget.fab-activated .chat-fab::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--chat-gradient);
+    z-index: -1;
+    animation: fabPulse 2s ease-in-out infinite;
+}
+
+.chat-widget.open .chat-fab::after {
+    animation: none;
+}
+
+@keyframes fabPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.4);
+        opacity: 0;
+    }
 }
 
 .chat-fab::before {
