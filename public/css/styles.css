@@ -887,13 +887,13 @@ button {
 /* Burbuja de diálogo */
 .robot-speech-bubble {
     position: absolute;
-    top: -100px;
+    top: -120px;
     left: 50%;
     transform: translateX(-50%);
     background: var(--bg-primary);
-    padding: 1rem 1.5rem;
-    border-radius: 20px;
-    box-shadow: var(--shadow);
+    padding: 1.25rem 2rem;
+    border-radius: 24px;
+    box-shadow: var(--shadow-lg);
     white-space: nowrap;
     animation: bubbleFloat 3s ease-in-out infinite;
     z-index: 10;
@@ -919,7 +919,7 @@ button {
 
 .robot-speech-bubble h2 {
     margin: 0;
-    font-size: 1.25rem;
+    font-size: 2.5rem;
     color: var(--text-primary);
     font-weight: 700;
     white-space: nowrap;
@@ -1562,7 +1562,7 @@ body.chat-active .back-to-top {
     }
 
     .robot-speech-bubble h2 {
-        font-size: 1.1rem;
+        font-size: 1.75rem;
         white-space: normal;
     }
 
@@ -1649,7 +1649,7 @@ body.chat-active .back-to-top {
     }
 
     .robot-speech-bubble h2 {
-        font-size: 1rem;
+        font-size: 1.5rem;
     }
 
     .about-stats {
