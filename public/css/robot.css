@@ -408,6 +408,62 @@
     filter: drop-shadow(0 0 12px var(--robot-eye-glow));
 }
 
+/* ===================================
+   Teletransporte de Ojos
+   =================================== */
+
+/* Animación de cerrar ojos (salida) */
+@keyframes teleportOut {
+    0% {
+        transform: scaleY(1);
+    }
+    100% {
+        transform: scaleY(0);
+    }
+}
+
+/* Animación de abrir ojos (entrada) */
+@keyframes teleportIn {
+    0% {
+        transform: scaleY(0);
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+/* Ojos flotantes - teletransporte salida */
+.floating-eyes.teleporting-out .floating-eye {
+    animation: teleportOut 0.15s ease-in forwards !important;
+}
+
+/* Ojos flotantes - teletransporte entrada */
+.floating-eyes.teleporting-in .floating-eye {
+    animation: teleportIn 0.2s ease-out forwards !important;
+}
+
+/* Ojos del robot hero - teletransporte */
+.robot-eyes.teleporting-out {
+    animation: teleportOut 0.15s ease-in forwards;
+    transform-origin: center;
+}
+
+.robot-eyes.teleporting-in {
+    animation: teleportIn 0.2s ease-out forwards;
+    transform-origin: center;
+}
+
+/* Ojos del robot contact - teletransporte */
+.robot-eyes-contact.teleporting-out {
+    animation: teleportOut 0.15s ease-in forwards;
+    transform-origin: center;
+}
+
+.robot-eyes-contact.teleporting-in {
+    animation: teleportIn 0.2s ease-out forwards;
+    transform-origin: center;
+}
+
 /* Responsive para ojos flotantes */
 @media (max-width: 768px) {
     .floating-eyes {
