@@ -285,84 +285,159 @@ function throttle(func, limit) {
 // ===================================
 function initializeRobot() {
     const container = document.getElementById('robotContainer');
+    const floatingEyes = document.getElementById('floatingEyes');
     if (!container) return;
 
-    const svg = container.querySelector('.robot-svg');
+    // Elementos del robot original
+    const robotEyes = container.querySelector('.robot-eyes');
     const leftIris = container.querySelector('.eye-left .eye-iris');
     const leftPupil = container.querySelector('.eye-left .eye-pupil');
     const rightIris = container.querySelector('.eye-right .eye-iris');
     const rightPupil = container.querySelector('.eye-right .eye-pupil');
+    const robotEyeParts = [leftIris, leftPupil, rightIris, rightPupil];
 
-    const maxMove = 6; // Maximo movimiento en px
+    // Elementos de ojos flotantes
+    const floatingLeftIris = floatingEyes?.querySelector('.floating-eye-left .floating-eye-iris');
+    const floatingLeftPupil = floatingEyes?.querySelector('.floating-eye-left .floating-eye-pupil');
+    const floatingRightIris = floatingEyes?.querySelector('.floating-eye-right .floating-eye-iris');
+    const floatingRightPupil = floatingEyes?.querySelector('.floating-eye-right .floating-eye-pupil');
+    const floatingEyeParts = [floatingLeftIris, floatingLeftPupil, floatingRightIris, floatingRightPupil];
 
-    // Seguimiento del mouse - los ojos siguen el cursor
-    document.addEventListener('mousemove', (e) => {
+    const maxMove = 6;
+    const floatingMaxMove = 4;
+    let currentMouseX = window.innerWidth / 2;
+    let currentMouseY = window.innerHeight / 2;
+    let isRobotVisible = true;
+
+    // Verificar si el robot esta en el viewport
+    function isRobotInViewport() {
+        const rect = container.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        // Robot visible si al menos 30% esta en pantalla
+        const visibleHeight = Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0);
+        return visibleHeight > rect.height * 0.3;
+    }
+
+    // Actualizar ojos del robot (cuando esta visible)
+    function updateRobotEyes() {
         const rect = container.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
 
-        // Calcular direccion hacia el mouse
-        const deltaX = e.clientX - centerX;
-        const deltaY = e.clientY - centerY;
-
-        // Normalizar y limitar el movimiento
+        const deltaX = currentMouseX - centerX;
+        const deltaY = currentMouseY - centerY;
         const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-        const maxDistance = Math.max(window.innerWidth, window.innerHeight) / 2;
-        const normalizedDistance = Math.min(distance / maxDistance, 1);
 
-        const moveX = (deltaX / distance) * maxMove * normalizedDistance || 0;
-        const moveY = (deltaY / distance) * maxMove * normalizedDistance || 0;
+        if (distance > 0) {
+            const maxDistance = Math.max(window.innerWidth, window.innerHeight) / 2;
+            const normalizedDistance = Math.min(distance / maxDistance, 1);
+            const moveX = (deltaX / distance) * maxMove * normalizedDistance;
+            const moveY = (deltaY / distance) * maxMove * normalizedDistance;
 
-        // Aplicar transformacion a iris y pupilas
-        const transform = `translate(${moveX}px, ${moveY}px)`;
+            const transform = `translate(${moveX}px, ${moveY}px)`;
+            robotEyeParts.forEach(el => {
+                if (el) el.style.transform = transform;
+            });
+        }
+    }
 
-        if (leftIris) leftIris.style.transform = transform;
-        if (leftPupil) leftPupil.style.transform = transform;
-        if (rightIris) rightIris.style.transform = transform;
-        if (rightPupil) rightPupil.style.transform = transform;
+    // Actualizar ojos flotantes (cuando robot no esta visible)
+    function updateFloatingEyes() {
+        if (!floatingEyes) return;
+
+        const rect = floatingEyes.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        const deltaX = currentMouseX - centerX;
+        const deltaY = currentMouseY - centerY;
+        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+        if (distance > 0) {
+            const maxDistance = Math.max(window.innerWidth, window.innerHeight) / 2;
+            const normalizedDistance = Math.min(distance / maxDistance, 1);
+            const moveX = (deltaX / distance) * floatingMaxMove * normalizedDistance;
+            const moveY = (deltaY / distance) * floatingMaxMove * normalizedDistance;
+
+            const transform = `translate(${moveX}px, ${moveY}px)`;
+            floatingEyeParts.forEach(el => {
+                if (el) el.style.transform = transform;
+            });
+        }
+    }
+
+    // Toggle entre ojos del robot y ojos flotantes
+    function updateEyesVisibility() {
+        const robotVisible = isRobotInViewport();
+
+        if (robotVisible !== isRobotVisible) {
+            isRobotVisible = robotVisible;
+
+            if (floatingEyes) {
+                if (robotVisible) {
+                    // Robot visible: ocultar ojos flotantes
+                    floatingEyes.classList.remove('visible');
+                    if (robotEyes) robotEyes.style.opacity = '1';
+                } else {
+                    // Robot no visible: mostrar ojos flotantes
+                    floatingEyes.classList.add('visible');
+                    if (robotEyes) robotEyes.style.opacity = '0.3';
+                }
+            }
+        }
+
+        // Actualizar posicion de ojos activos
+        if (isRobotVisible) {
+            updateRobotEyes();
+        } else {
+            updateFloatingEyes();
+        }
+    }
+
+    // Seguimiento del mouse
+    document.addEventListener('mousemove', (e) => {
+        currentMouseX = e.clientX;
+        currentMouseY = e.clientY;
+        updateEyesVisibility();
     });
 
-    // Click en el robot = parpadeo rapido
+    // Scroll con throttle
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        if (!scrollTimeout) {
+            scrollTimeout = setTimeout(() => {
+                updateEyesVisibility();
+                scrollTimeout = null;
+            }, 16);
+        }
+    }, { passive: true });
+
+    // Click en el robot = parpadeo
     container.addEventListener('click', () => {
-        const eyes = container.querySelector('.robot-eyes');
-        if (!eyes) return;
-
-        // Detener animacion actual y hacer parpadeo rapido
-        eyes.style.animation = 'none';
-        eyes.offsetHeight; // Trigger reflow
-        eyes.style.animation = 'blink 0.2s ease-in-out';
-
-        // Restaurar animacion normal
+        if (!robotEyes) return;
+        robotEyes.style.animation = 'none';
+        robotEyes.offsetHeight;
+        robotEyes.style.animation = 'blink 0.2s ease-in-out';
         setTimeout(() => {
-            eyes.style.animation = 'blink 4s ease-in-out infinite';
+            robotEyes.style.animation = 'blink 4s ease-in-out infinite';
         }, 200);
     });
 
-    // Reset suave cuando el mouse sale de la ventana
-    document.addEventListener('mouseleave', () => {
-        const transform = 'translate(0px, 0px)';
-        if (leftIris) {
-            leftIris.style.transition = 'transform 0.3s ease';
-            leftIris.style.transform = transform;
-        }
-        if (leftPupil) {
-            leftPupil.style.transition = 'transform 0.3s ease';
-            leftPupil.style.transform = transform;
-        }
-        if (rightIris) {
-            rightIris.style.transition = 'transform 0.3s ease';
-            rightIris.style.transform = transform;
-        }
-        if (rightPupil) {
-            rightPupil.style.transition = 'transform 0.3s ease';
-            rightPupil.style.transform = transform;
-        }
-
-        // Restaurar transicion rapida para seguimiento
-        setTimeout(() => {
-            [leftIris, leftPupil, rightIris, rightPupil].forEach(el => {
-                if (el) el.style.transition = 'transform 0.1s ease-out';
+    // Click en ojos flotantes = parpadeo
+    if (floatingEyes) {
+        floatingEyes.addEventListener('click', () => {
+            const eyes = floatingEyes.querySelectorAll('.floating-eye');
+            eyes.forEach(eye => {
+                eye.style.animation = 'none';
+                eye.offsetHeight;
+                eye.style.animation = 'floatingBlink 0.2s ease-in-out';
+                setTimeout(() => {
+                    eye.style.animation = 'floatingBlink 3.5s ease-in-out infinite';
+                }, 200);
             });
-        }, 300);
-    });
+        });
+    }
+
+    // Inicializar
+    updateEyesVisibility();
 }

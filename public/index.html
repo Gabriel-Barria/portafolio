@@ -511,6 +511,35 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
+    <!-- Floating Robot Eyes -->
+    <div class="floating-eyes" id="floatingEyes" aria-hidden="true">
+        <svg class="floating-eyes-svg" viewBox="0 0 100 50">
+            <defs>
+                <filter id="floatingGlow">
+                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                    <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+            </defs>
+            <!-- Ojo izquierdo -->
+            <g class="floating-eye floating-eye-left">
+                <ellipse cx="25" cy="25" rx="20" ry="22" class="floating-eye-socket"/>
+                <circle cx="25" cy="25" r="12" class="floating-eye-iris"/>
+                <circle cx="25" cy="25" r="5" class="floating-eye-pupil"/>
+                <circle cx="21" cy="21" r="3" class="floating-eye-reflection"/>
+            </g>
+            <!-- Ojo derecho -->
+            <g class="floating-eye floating-eye-right">
+                <ellipse cx="75" cy="25" rx="20" ry="22" class="floating-eye-socket"/>
+                <circle cx="75" cy="25" r="12" class="floating-eye-iris"/>
+                <circle cx="75" cy="25" r="5" class="floating-eye-pupil"/>
+                <circle cx="71" cy="21" r="3" class="floating-eye-reflection"/>
+            </g>
+        </svg>
+    </div>
+
     <!-- Mini Projects Modal -->
     <div class="project-modal" id="projectModal">
         <div class="modal-content">

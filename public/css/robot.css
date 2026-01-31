@@ -68,13 +68,21 @@
 .eye-iris {
     fill: var(--robot-eye);
     filter: drop-shadow(0 0 8px var(--robot-eye-glow));
-    transition: transform 0.1s ease-out;
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
 }
 
 /* Pupila */
 .eye-pupil {
     fill: var(--robot-dark);
-    transition: transform 0.1s ease-out;
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+}
+
+/* Reflejo del ojo - sigue la pupila */
+.eye-reflection {
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
 }
 
 /* Reflejo del ojo */
@@ -297,5 +305,114 @@
     .eye-iris,
     .eye-pupil {
         transition: none;
+    }
+}
+
+/* ===================================
+   Ojos Flotantes (Fixed)
+   =================================== */
+
+.floating-eyes {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 80px;
+    height: 40px;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0) translateY(-50px);
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.floating-eyes.visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: auto;
+}
+
+.floating-eyes-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.3));
+}
+
+/* Cuencas de ojos flotantes */
+.floating-eye-socket {
+    fill: var(--robot-screen);
+    stroke: var(--robot-dark);
+    stroke-width: 2;
+}
+
+/* Iris flotante */
+.floating-eye-iris {
+    fill: var(--robot-eye);
+    filter: drop-shadow(0 0 8px var(--robot-eye-glow));
+    transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Pupila flotante */
+.floating-eye-pupil {
+    fill: var(--robot-dark);
+    transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reflejo */
+.floating-eye-reflection {
+    fill: white;
+    opacity: 0.6;
+}
+
+/* Parpadeo de ojos flotantes */
+.floating-eyes .floating-eye {
+    transform-origin: center;
+}
+
+@keyframes floatingBlink {
+    0%, 45%, 55%, 100% {
+        transform: scaleY(1);
+    }
+    50% {
+        transform: scaleY(0.1);
+    }
+}
+
+.floating-eyes.visible .floating-eye {
+    animation: floatingBlink 3.5s ease-in-out infinite;
+}
+
+/* Hover en ojos flotantes */
+.floating-eyes:hover .floating-eye-iris {
+    filter: drop-shadow(0 0 12px var(--robot-eye-glow));
+}
+
+/* Responsive para ojos flotantes */
+@media (max-width: 768px) {
+    .floating-eyes {
+        width: 60px;
+        height: 30px;
+        top: 80px; /* Debajo del navbar (70px + margen) */
+        right: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .floating-eyes {
+        width: 50px;
+        height: 25px;
+        top: 75px; /* Debajo del navbar */
+        right: 10px;
+    }
+}
+
+/* Reducir animaciones */
+@media (prefers-reduced-motion: reduce) {
+    .floating-eyes {
+        transition: opacity 0.2s ease;
+    }
+
+    .floating-eyes.visible .floating-eye {
+        animation: none;
     }
 }
