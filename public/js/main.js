@@ -203,25 +203,21 @@ function initializeScrollAnimations() {
 }
 
 // ===================================
-// Contact Form
+// Contact Form (Legacy - replaced by contact robot)
 // ===================================
 function initializeContactForm() {
     const form = document.getElementById('contactForm');
+    if (!form) return; // Form replaced by contact robot
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-
         const formData = {
             name: form.name.value,
             email: form.email.value,
             subject: form.subject.value,
             message: form.message.value
         };
-
-        // Here you would typically send this to a backend
         console.log('Form submitted:', formData);
-
-        // Show success message (you can replace this with a modal or notification)
         alert('¡Mensaje enviado exitosamente! Te responderé pronto.');
         form.reset();
     });

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/mini-projects.css">
     <link rel="stylesheet" href="css/robot.css">
+    <link rel="stylesheet" href="css/chat.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -400,74 +401,153 @@
         <div class="container">
             <div class="section-header">
                 <span class="section-label">Hablemos</span>
-                <h2 class="section-title">Ponte en <span class="gradient-text">Contacto</span></h2>
+                <h2 class="section-title">¿Quieres <span class="gradient-text">Contactarme</span>?</h2>
                 <p class="section-description">
-                    ¿Tienes un proyecto en mente? Conversemos sobre cómo puedo ayudarte
+                    Elige cómo prefieres comunicarte conmigo
                 </p>
             </div>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
+
+            <!-- Robot de Contacto -->
+            <div class="contact-robot-container">
+                <!-- Opción Izquierda: Ver Datos -->
+                <div class="contact-option contact-option-left" id="contactDataOption">
+                    <div class="contact-option-card">
+                        <div class="contact-option-icon">
+                            <i class="fas fa-address-card"></i>
                         </div>
-                        <div class="contact-details">
-                            <h4>Email</h4>
-                            <a href="mailto:gabriel.barria@example.com">gabriel.barria@example.com</a>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Teléfono</h4>
-                            <a href="tel:+56912345678">+56 9 1234 5678</a>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Ubicación</h4>
-                            <p>Santiago, Chile</p>
-                        </div>
-                    </div>
-                    <div class="contact-social">
-                        <a href="https://github.com/Gabriel-Barria" target="_blank" class="social-link">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://linkedin.com" target="_blank" class="social-link">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://twitter.com" target="_blank" class="social-link">
-                            <i class="fab fa-twitter"></i>
-                        </a>
+                        <h3>Ver Datos de Contacto</h3>
+                        <p>Email, teléfono y redes sociales</p>
                     </div>
                 </div>
-                <form class="contact-form" id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Nombre</label>
-                        <input type="text" id="name" name="name" required>
+
+                <!-- Robot SVG Central -->
+                <div class="contact-robot" id="contactRobot">
+                    <svg class="contact-robot-svg" viewBox="0 0 300 400" aria-label="Robot asistente de contacto">
+                        <defs>
+                            <linearGradient id="contactRobotGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#667eea"/>
+                                <stop offset="100%" style="stop-color:#764ba2"/>
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Brazo Izquierdo -->
+                        <g class="robot-arm robot-arm-left">
+                            <path d="M 60 200 Q 30 200, 20 170 L 15 140"
+                                  fill="none" stroke="var(--robot-metal, #94a3b8)" stroke-width="12" stroke-linecap="round"/>
+                            <circle cx="15" cy="135" r="15" fill="url(#contactRobotGradient)" class="robot-hand"/>
+                            <text x="15" y="140" text-anchor="middle" fill="white" font-size="12">
+                                <tspan>📋</tspan>
+                            </text>
+                        </g>
+
+                        <!-- Brazo Derecho -->
+                        <g class="robot-arm robot-arm-right">
+                            <path d="M 240 200 Q 270 200, 280 170 L 285 140"
+                                  fill="none" stroke="var(--robot-metal, #94a3b8)" stroke-width="12" stroke-linecap="round"/>
+                            <circle cx="285" cy="135" r="15" fill="url(#contactRobotGradient)" class="robot-hand"/>
+                            <text x="285" y="140" text-anchor="middle" fill="white" font-size="12">
+                                <tspan>💬</tspan>
+                            </text>
+                        </g>
+
+                        <!-- Antena -->
+                        <g class="robot-antenna">
+                            <line x1="150" y1="60" x2="150" y2="30" stroke="var(--robot-dark, #334155)" stroke-width="4" stroke-linecap="round"/>
+                            <circle cx="150" cy="25" r="8" fill="#00ff88" class="antenna-light-contact"/>
+                        </g>
+
+                        <!-- Cabeza -->
+                        <g class="robot-head-contact">
+                            <rect x="80" y="60" width="140" height="100" rx="20" fill="var(--robot-metal, #e2e8f0)" stroke="var(--robot-metal-dark, #94a3b8)" stroke-width="2"/>
+
+                            <!-- Ojos -->
+                            <g class="robot-eyes-contact">
+                                <ellipse cx="115" cy="100" rx="20" ry="22" fill="var(--robot-screen, #1e293b)"/>
+                                <circle cx="115" cy="100" r="12" fill="#00ff88" class="eye-iris-contact"/>
+                                <circle cx="115" cy="100" r="5" fill="var(--robot-dark, #334155)"/>
+
+                                <ellipse cx="185" cy="100" rx="20" ry="22" fill="var(--robot-screen, #1e293b)"/>
+                                <circle cx="185" cy="100" r="12" fill="#00ff88" class="eye-iris-contact"/>
+                                <circle cx="185" cy="100" r="5" fill="var(--robot-dark, #334155)"/>
+                            </g>
+
+                            <!-- Boca sonriente -->
+                            <path d="M 120 140 Q 150 160, 180 140" fill="none" stroke="url(#contactRobotGradient)" stroke-width="4" stroke-linecap="round" class="robot-smile"/>
+                        </g>
+
+                        <!-- Cuello -->
+                        <rect x="130" y="160" width="40" height="20" rx="5" fill="var(--robot-metal, #e2e8f0)"/>
+
+                        <!-- Cuerpo -->
+                        <g class="robot-body-contact">
+                            <rect x="75" y="180" width="150" height="120" rx="20" fill="var(--robot-metal, #e2e8f0)" stroke="var(--robot-metal-dark, #94a3b8)" stroke-width="2"/>
+
+                            <!-- Pantalla del pecho con signo de interrogación -->
+                            <rect x="100" y="200" width="100" height="70" rx="10" fill="var(--robot-screen, #1e293b)"/>
+                            <text x="150" y="250" text-anchor="middle" fill="url(#contactRobotGradient)" font-size="40" font-weight="bold">?</text>
+                        </g>
+
+                        <!-- Piernas -->
+                        <rect x="100" y="300" width="30" height="60" rx="8" fill="var(--robot-metal, #e2e8f0)"/>
+                        <rect x="170" y="300" width="30" height="60" rx="8" fill="var(--robot-metal, #e2e8f0)"/>
+
+                        <!-- Pies -->
+                        <ellipse cx="115" cy="365" rx="25" ry="10" fill="var(--robot-metal-dark, #94a3b8)"/>
+                        <ellipse cx="185" cy="365" rx="25" ry="10" fill="var(--robot-metal-dark, #94a3b8)"/>
+                    </svg>
+
+                    <!-- Burbuja de diálogo -->
+                    <div class="robot-speech-bubble">
+                        <p>¡Hola! ¿Cómo te gustaría contactarme?</p>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
+                </div>
+
+                <!-- Opción Derecha: Chat Online -->
+                <div class="contact-option contact-option-right" id="contactChatOption">
+                    <div class="contact-option-card">
+                        <div class="contact-option-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>Chat en Vivo</h3>
+                        <p>Chatea conmigo directamente</p>
                     </div>
-                    <div class="form-group">
-                        <label for="subject">Asunto</label>
-                        <input type="text" id="subject" name="subject" required>
+                </div>
+            </div>
+
+            <!-- Panel de Datos de Contacto (oculto por defecto) -->
+            <div class="contact-data-panel" id="contactDataPanel">
+                <button class="contact-data-close" id="contactDataClose">
+                    <i class="fas fa-times"></i>
+                </button>
+                <h3>Mis Datos de Contacto</h3>
+                <div class="contact-data-items">
+                    <a href="mailto:gabriel.barria@example.com" class="contact-data-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email</strong>
+                            <span>gabriel.barria@example.com</span>
+                        </div>
+                    </a>
+                    <a href="tel:+56912345678" class="contact-data-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>Teléfono</strong>
+                            <span>+56 9 1234 5678</span>
+                        </div>
+                    </a>
+                    <div class="contact-data-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>Ubicación</strong>
+                            <span>Santiago, Chile</span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="message">Mensaje</label>
-                        <textarea id="message" name="message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">
-                        <span>Enviar Mensaje</span>
-                        <i class="fas fa-paper-plane"></i>
-                    </button>
-                </form>
+                </div>
+                <div class="contact-data-social">
+                    <a href="https://github.com/Gabriel-Barria" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                </div>
             </div>
         </div>
     </section>
@@ -555,7 +635,71 @@
         </div>
     </div>
 
+    <!-- Chat Widget -->
+    <div class="chat-widget" id="chatWidget">
+        <!-- Botón flotante -->
+        <button class="chat-fab" id="chatFab" aria-label="Abrir chat">
+            <span class="chat-fab-badge">1</span>
+            <i class="fas fa-comments"></i>
+            <i class="fas fa-times"></i>
+        </button>
+
+        <!-- Ventana de chat -->
+        <div class="chat-window" id="chatWindow">
+            <!-- Header -->
+            <div class="chat-header">
+                <div class="chat-header-info">
+                    <div class="chat-avatar">
+                        <div class="chat-avatar-img">GB</div>
+                        <span class="chat-status online"></span>
+                    </div>
+                    <div class="chat-header-text">
+                        <h4>Gabriel Barría</h4>
+                        <span>Responde en minutos</span>
+                    </div>
+                </div>
+                <button class="chat-close" id="chatClose" aria-label="Cerrar chat">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Mensajes -->
+            <div class="chat-messages" id="chatMessages">
+                <!-- Los mensajes se agregan dinámicamente -->
+            </div>
+
+            <!-- Quick Replies -->
+            <div class="chat-quick-replies" id="chatQuickReplies">
+                <!-- Se generan dinámicamente -->
+            </div>
+
+            <!-- Indicador de escritura -->
+            <div class="chat-typing" id="chatTyping">
+                <div class="chat-typing-bubble">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <!-- Input -->
+            <div class="chat-input-container">
+                <input
+                    type="text"
+                    class="chat-input"
+                    id="chatInput"
+                    placeholder="Escribe un mensaje..."
+                    autocomplete="off"
+                >
+                <button class="chat-send" id="chatSend" aria-label="Enviar mensaje">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="js/main.js"></script>
     <script src="js/mini-projects.js"></script>
+    <script src="js/chat.js"></script>
 </body>
 </html>
