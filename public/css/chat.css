@@ -204,33 +204,6 @@
     transform: scale(1) rotate(0deg);
 }
 
-/* Badge de notificación */
-.chat-fab-badge {
-    position: absolute;
-    top: -4px;
-    right: -4px;
-    width: 22px;
-    height: 22px;
-    background: #ef4444;
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 600;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid white;
-    animation: badgePulse 2s ease-in-out infinite;
-}
-
-.chat-widget.open .chat-fab-badge {
-    display: none;
-}
-
-@keyframes badgePulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-}
 
 /* Efecto pulse del FAB */
 .chat-fab::after {
