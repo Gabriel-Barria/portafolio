@@ -442,6 +442,12 @@
     animation: teleportIn 0.2s ease-out forwards !important;
 }
 
+/* Ojos de robots ocultos */
+.robot-eyes.eyes-hidden,
+.robot-eyes-contact.eyes-hidden {
+    opacity: 0;
+}
+
 /* Ojos del robot hero - teletransporte */
 .robot-eyes.teleporting-out {
     animation: teleportOut 0.15s ease-in forwards;
@@ -449,6 +455,7 @@
 }
 
 .robot-eyes.teleporting-in {
+    opacity: 1;
     animation: teleportIn 0.2s ease-out forwards;
     transform-origin: center;
 }
@@ -460,6 +467,7 @@
 }
 
 .robot-eyes-contact.teleporting-in {
+    opacity: 1;
     animation: teleportIn 0.2s ease-out forwards;
     transform-origin: center;
 }

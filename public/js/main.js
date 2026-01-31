@@ -291,17 +291,17 @@ function initializeRobot() {
         {
             id: 'hero',
             container: document.getElementById('robotContainer'),
-            eyesElement: document.querySelector('#robotContainer .robot-eyes')
+            eyes: document.querySelector('#robotContainer .robot-eyes')
         },
         {
             id: 'about',
             container: document.querySelector('.about-image-wrapper'),
-            eyesElement: null // SVG externo, no tiene ojos propios
+            eyes: null // No tiene ojos propios
         },
         {
             id: 'contact',
             container: document.getElementById('contactRobot'),
-            eyesElement: document.querySelector('#contactRobot .robot-eyes-contact')
+            eyes: document.querySelector('#contactRobot .robot-eyes-contact')
         }
     ];
 
@@ -328,38 +328,44 @@ function initializeRobot() {
         return null;
     }
 
+    // Mostrar ojos del robot
+    function showRobotEyes(robot) {
+        if (robot?.eyes) {
+            robot.eyes.classList.remove('eyes-hidden');
+            robot.eyes.classList.add('teleporting-in');
+            setTimeout(() => robot.eyes.classList.remove('teleporting-in'), 200);
+        }
+    }
+
+    // Ocultar ojos del robot
+    function hideRobotEyes(robot) {
+        if (robot?.eyes) {
+            robot.eyes.classList.add('teleporting-out');
+            setTimeout(() => {
+                robot.eyes.classList.remove('teleporting-out');
+                robot.eyes.classList.add('eyes-hidden');
+            }, 150);
+        }
+    }
+
     // Teletransportar ojos: cerrar en origen, abrir en destino
     function teleportEyes(fromFloating, toRobot) {
         if (isAnimating) return;
         isAnimating = true;
 
         if (fromFloating && toRobot) {
-            // Flotantes → Robot: cerrar flotantes, abrir en robot
+            // Flotantes → Robot: cerrar flotantes, abrir ojos del robot
             floatingEyes.classList.add('teleporting-out');
 
             setTimeout(() => {
                 floatingEyes.classList.remove('visible', 'teleporting-out');
-                if (toRobot.eyesElement) {
-                    toRobot.eyesElement.classList.add('teleporting-in');
-                    toRobot.eyesElement.style.opacity = '1';
-                    setTimeout(() => {
-                        toRobot.eyesElement.classList.remove('teleporting-in');
-                        isAnimating = false;
-                    }, 200);
-                } else {
-                    isAnimating = false;
-                }
+                showRobotEyes(toRobot);
+                isAnimating = false;
             }, 150);
 
         } else if (!fromFloating && !toRobot) {
-            // Robot → Flotantes: cerrar en robot, abrir flotantes
-            if (currentRobot?.eyesElement) {
-                currentRobot.eyesElement.classList.add('teleporting-out');
-                setTimeout(() => {
-                    currentRobot.eyesElement.classList.remove('teleporting-out');
-                    currentRobot.eyesElement.style.opacity = '0.3';
-                }, 150);
-            }
+            // Robot → Flotantes: cerrar ojos robot, abrir flotantes
+            hideRobotEyes(currentRobot);
 
             setTimeout(() => {
                 floatingEyes.classList.add('visible', 'teleporting-in');
@@ -367,30 +373,8 @@ function initializeRobot() {
                     floatingEyes.classList.remove('teleporting-in');
                     isAnimating = false;
                 }, 200);
-            }, 100);
+            }, 150);
 
-        } else if (!fromFloating && toRobot) {
-            // Robot → Otro Robot: cerrar actual, abrir nuevo
-            if (currentRobot?.eyesElement) {
-                currentRobot.eyesElement.classList.add('teleporting-out');
-                setTimeout(() => {
-                    currentRobot.eyesElement.classList.remove('teleporting-out');
-                    currentRobot.eyesElement.style.opacity = '0.3';
-                }, 150);
-            }
-
-            setTimeout(() => {
-                if (toRobot.eyesElement) {
-                    toRobot.eyesElement.classList.add('teleporting-in');
-                    toRobot.eyesElement.style.opacity = '1';
-                    setTimeout(() => {
-                        toRobot.eyesElement.classList.remove('teleporting-in');
-                        isAnimating = false;
-                    }, 200);
-                } else {
-                    isAnimating = false;
-                }
-            }, 100);
         } else {
             isAnimating = false;
         }
@@ -400,20 +384,21 @@ function initializeRobot() {
     function handleRobotChange(newRobot) {
         if (isAnimating) return;
 
-        const wasFloating = !currentRobot;
-        const isNowFloating = !newRobot;
+        const hadRobot = currentRobot !== null;
+        const hasRobot = newRobot !== null;
 
-        if (wasFloating && newRobot) {
-            // Estaban flotando → van a robot
+        if (!hadRobot && hasRobot) {
+            // No había robot → hay robot: ocultar flotantes, mostrar ojos robot
             teleportEyes(true, newRobot);
             currentRobot = newRobot;
-        } else if (!wasFloating && isNowFloating) {
-            // Estaban en robot → van a flotar
+        } else if (hadRobot && !hasRobot) {
+            // Había robot → no hay robot: ocultar ojos robot, mostrar flotantes
             teleportEyes(false, null);
             currentRobot = null;
-        } else if (!wasFloating && newRobot && currentRobot?.id !== newRobot.id) {
-            // Cambio entre robots
-            teleportEyes(false, newRobot);
+        } else if (hadRobot && hasRobot && currentRobot?.id !== newRobot.id) {
+            // Cambio entre robots: ocultar ojos del anterior, mostrar del nuevo
+            hideRobotEyes(currentRobot);
+            setTimeout(() => showRobotEyes(newRobot), 150);
             currentRobot = newRobot;
         }
     }
@@ -443,31 +428,32 @@ function initializeRobot() {
         }
     }
 
-    // Actualizar seguimiento de ojos del robot activo
-    function updateRobotEyesTracking() {
-        if (!currentRobot?.container) return;
+    // Actualizar seguimiento de ojos de todos los robots
+    function updateAllRobotEyes() {
+        robots.forEach(robot => {
+            if (!robot.container) return;
 
-        const rect = currentRobot.container.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
+            const rect = robot.container.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
 
-        const deltaX = currentMouseX - centerX;
-        const deltaY = currentMouseY - centerY;
-        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+            const deltaX = currentMouseX - centerX;
+            const deltaY = currentMouseY - centerY;
+            const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-        if (distance > 0) {
-            const maxMove = 6;
-            const maxDistance = Math.max(window.innerWidth, window.innerHeight) / 2;
-            const normalizedDistance = Math.min(distance / maxDistance, 1);
-            const moveX = (deltaX / distance) * maxMove * normalizedDistance;
-            const moveY = (deltaY / distance) * maxMove * normalizedDistance;
+            if (distance > 0) {
+                const maxMove = 6;
+                const maxDistance = Math.max(window.innerWidth, window.innerHeight) / 2;
+                const normalizedDistance = Math.min(distance / maxDistance, 1);
+                const moveX = (deltaX / distance) * maxMove * normalizedDistance;
+                const moveY = (deltaY / distance) * maxMove * normalizedDistance;
 
-            // Actualizar ojos del robot actual
-            const eyeParts = currentRobot.container.querySelectorAll('.eye-iris, .eye-pupil, .eye-iris-contact');
-            eyeParts.forEach(el => {
-                if (el) el.style.transform = `translate(${moveX}px, ${moveY}px)`;
-            });
-        }
+                const eyeParts = robot.container.querySelectorAll('.eye-iris, .eye-pupil, .eye-iris-contact');
+                eyeParts.forEach(el => {
+                    if (el) el.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                });
+            }
+        });
     }
 
     // IntersectionObserver para detectar robots visibles
@@ -509,11 +495,8 @@ function initializeRobot() {
     document.addEventListener('mousemove', (e) => {
         currentMouseX = e.clientX;
         currentMouseY = e.clientY;
-        if (currentRobot) {
-            updateRobotEyesTracking();
-        } else {
-            updateFloatingEyesTracking();
-        }
+        updateAllRobotEyes();
+        updateFloatingEyesTracking();
     });
 
     // Touch para mobile
@@ -521,11 +504,8 @@ function initializeRobot() {
         if (e.touches.length > 0) {
             currentMouseX = e.touches[0].clientX;
             currentMouseY = e.touches[0].clientY;
-            if (currentRobot) {
-                updateRobotEyesTracking();
-            } else {
-                updateFloatingEyesTracking();
-            }
+            updateAllRobotEyes();
+            updateFloatingEyesTracking();
         }
     }, { passive: true });
 
@@ -542,15 +522,22 @@ function initializeRobot() {
         });
     });
 
-    // Inicializar: verificar estado inicial
+    // Inicializar: ocultar ojos de todos los robots al inicio
+    robots.forEach(robot => {
+        if (robot.eyes) {
+            robot.eyes.classList.add('eyes-hidden');
+        }
+    });
+
+    // Verificar estado inicial después de un momento
     setTimeout(() => {
         const initialRobot = getVisibleRobot();
         if (initialRobot) {
             currentRobot = initialRobot;
-            if (initialRobot.eyesElement) {
-                initialRobot.eyesElement.style.opacity = '1';
-            }
+            // Mostrar ojos del robot inicial
+            showRobotEyes(initialRobot);
         } else {
+            // Sin robot: mostrar ojos flotantes
             floatingEyes.classList.add('visible');
         }
     }, 100);
