@@ -1184,6 +1184,12 @@ button {
     transform: translateY(-5px);
 }
 
+/* Back to Top swap cuando chat está activo */
+body.chat-active .back-to-top {
+    right: auto;
+    left: 2rem;
+}
+
 /* ===================================
    Responsive Design
    =================================== */

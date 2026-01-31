@@ -86,6 +86,8 @@ function initializeChatWidget() {
         // Activar FAB para que quede visible después de cerrar
         if (!widget.classList.contains('fab-activated')) {
             widget.classList.add('fab-activated');
+            // Mover botón Back to Top a la izquierda
+            document.body.classList.add('chat-active');
         }
 
         if (!hasGreeted) {

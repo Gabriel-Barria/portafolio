@@ -36,7 +36,7 @@
 .chat-widget {
     position: fixed;
     bottom: 24px;
-    left: 24px;
+    right: 24px;
     z-index: 9998;
     font-family: var(--font-primary, 'Inter', sans-serif);
 }
@@ -576,7 +576,7 @@
 @media (max-width: 480px) {
     .chat-widget {
         bottom: 24px;
-        left: 16px;
+        right: 16px;
     }
 
     .chat-fab {
