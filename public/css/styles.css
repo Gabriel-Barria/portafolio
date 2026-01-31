@@ -887,7 +887,7 @@ button {
 /* Burbuja de diálogo */
 .robot-speech-bubble {
     position: absolute;
-    top: -60px;
+    top: -100px;
     left: 50%;
     transform: translateX(-50%);
     background: var(--bg-primary);
@@ -1551,7 +1551,7 @@ body.chat-active .back-to-top {
         text-align: center;
         padding: 0.75rem 1rem;
         font-size: 0.9rem;
-        top: -50px;
+        top: -90px;
     }
 
     .contact-option-card {
@@ -1634,7 +1634,7 @@ body.chat-active .back-to-top {
     .robot-speech-bubble {
         max-width: 180px;
         font-size: 0.85rem;
-        top: -45px;
+        top: -80px;
     }
 
     .about-stats {
