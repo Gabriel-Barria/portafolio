@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeMiniProjects(); // Updated to use mini projects
     initializeContactForm();
     initializeBackToTop();
+    initializeRobot();
 });
 
 // ===================================
@@ -277,4 +278,91 @@ function throttle(func, limit) {
             setTimeout(() => inThrottle = false, limit);
         }
     };
+}
+
+// ===================================
+// Robot Interactivo
+// ===================================
+function initializeRobot() {
+    const container = document.getElementById('robotContainer');
+    if (!container) return;
+
+    const svg = container.querySelector('.robot-svg');
+    const leftIris = container.querySelector('.eye-left .eye-iris');
+    const leftPupil = container.querySelector('.eye-left .eye-pupil');
+    const rightIris = container.querySelector('.eye-right .eye-iris');
+    const rightPupil = container.querySelector('.eye-right .eye-pupil');
+
+    const maxMove = 6; // Maximo movimiento en px
+
+    // Seguimiento del mouse - los ojos siguen el cursor
+    document.addEventListener('mousemove', (e) => {
+        const rect = container.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        // Calcular direccion hacia el mouse
+        const deltaX = e.clientX - centerX;
+        const deltaY = e.clientY - centerY;
+
+        // Normalizar y limitar el movimiento
+        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        const maxDistance = Math.max(window.innerWidth, window.innerHeight) / 2;
+        const normalizedDistance = Math.min(distance / maxDistance, 1);
+
+        const moveX = (deltaX / distance) * maxMove * normalizedDistance || 0;
+        const moveY = (deltaY / distance) * maxMove * normalizedDistance || 0;
+
+        // Aplicar transformacion a iris y pupilas
+        const transform = `translate(${moveX}px, ${moveY}px)`;
+
+        if (leftIris) leftIris.style.transform = transform;
+        if (leftPupil) leftPupil.style.transform = transform;
+        if (rightIris) rightIris.style.transform = transform;
+        if (rightPupil) rightPupil.style.transform = transform;
+    });
+
+    // Click en el robot = parpadeo rapido
+    container.addEventListener('click', () => {
+        const eyes = container.querySelector('.robot-eyes');
+        if (!eyes) return;
+
+        // Detener animacion actual y hacer parpadeo rapido
+        eyes.style.animation = 'none';
+        eyes.offsetHeight; // Trigger reflow
+        eyes.style.animation = 'blink 0.2s ease-in-out';
+
+        // Restaurar animacion normal
+        setTimeout(() => {
+            eyes.style.animation = 'blink 4s ease-in-out infinite';
+        }, 200);
+    });
+
+    // Reset suave cuando el mouse sale de la ventana
+    document.addEventListener('mouseleave', () => {
+        const transform = 'translate(0px, 0px)';
+        if (leftIris) {
+            leftIris.style.transition = 'transform 0.3s ease';
+            leftIris.style.transform = transform;
+        }
+        if (leftPupil) {
+            leftPupil.style.transition = 'transform 0.3s ease';
+            leftPupil.style.transform = transform;
+        }
+        if (rightIris) {
+            rightIris.style.transition = 'transform 0.3s ease';
+            rightIris.style.transform = transform;
+        }
+        if (rightPupil) {
+            rightPupil.style.transition = 'transform 0.3s ease';
+            rightPupil.style.transform = transform;
+        }
+
+        // Restaurar transicion rapida para seguimiento
+        setTimeout(() => {
+            [leftIris, leftPupil, rightIris, rightPupil].forEach(el => {
+                if (el) el.style.transition = 'transform 0.1s ease-out';
+            });
+        }, 300);
+    });
 }

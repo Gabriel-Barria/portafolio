@@ -432,17 +432,6 @@ button {
     50% { transform: translateY(-20px); }
 }
 
-.image-placeholder {
-    width: 100%;
-    aspect-ratio: 1;
-    background: var(--gradient-primary);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 8rem;
-    color: white;
-}
 
 .scroll-indicator {
     position: absolute;

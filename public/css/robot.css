@@ -1,0 +1,301 @@
+/* ===================================
+   Robot Observador - Estilos
+   =================================== */
+
+/* Variables del robot */
+:root {
+    --robot-primary: #667eea;
+    --robot-secondary: #764ba2;
+    --robot-metal: #e2e8f0;
+    --robot-metal-dark: #94a3b8;
+    --robot-dark: #334155;
+    --robot-eye: #00ff88;
+    --robot-eye-glow: rgba(0, 255, 136, 0.6);
+    --robot-screen: #1e293b;
+}
+
+[data-theme="dark"] {
+    --robot-metal: #475569;
+    --robot-metal-dark: #334155;
+    --robot-dark: #1e293b;
+    --robot-eye: #00ffcc;
+    --robot-eye-glow: rgba(0, 255, 204, 0.8);
+    --robot-screen: #0f172a;
+}
+
+/* Contenedor principal */
+.robot-container {
+    width: 100%;
+    aspect-ratio: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* SVG del robot */
+.robot-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 10px 30px rgba(102, 126, 234, 0.3));
+    transition: filter 0.3s ease;
+}
+
+.robot-container:hover .robot-svg {
+    filter: drop-shadow(0 15px 40px rgba(102, 126, 234, 0.5));
+}
+
+/* ===================================
+   Partes del Robot
+   =================================== */
+
+/* Cabeza */
+.head-main {
+    fill: var(--robot-metal);
+    stroke: var(--robot-metal-dark);
+    stroke-width: 2;
+}
+
+/* Cuencas de los ojos */
+.eye-socket {
+    fill: var(--robot-screen);
+    stroke: var(--robot-dark);
+    stroke-width: 1;
+}
+
+/* Iris de los ojos */
+.eye-iris {
+    fill: var(--robot-eye);
+    filter: drop-shadow(0 0 8px var(--robot-eye-glow));
+    transition: transform 0.1s ease-out;
+}
+
+/* Pupila */
+.eye-pupil {
+    fill: var(--robot-dark);
+    transition: transform 0.1s ease-out;
+}
+
+/* Reflejo del ojo */
+.eye-reflection {
+    fill: white;
+    opacity: 0.6;
+}
+
+/* Boca LED */
+.robot-mouth {
+    fill: var(--robot-primary);
+    opacity: 0.8;
+}
+
+/* Cuerpo */
+.body-main {
+    fill: var(--robot-metal);
+    stroke: var(--robot-metal-dark);
+    stroke-width: 2;
+}
+
+/* Pantalla del pecho */
+.body-screen {
+    fill: var(--robot-screen);
+    stroke: var(--robot-dark);
+    stroke-width: 1;
+}
+
+/* Líneas de la pantalla */
+.screen-line {
+    stroke: var(--robot-primary);
+    stroke-width: 2;
+    stroke-linecap: round;
+    opacity: 0.7;
+}
+
+/* Antena */
+.antenna-stem {
+    stroke: var(--robot-dark);
+    stroke-width: 3;
+    stroke-linecap: round;
+}
+
+.antenna-light {
+    fill: var(--robot-eye);
+    filter: drop-shadow(0 0 10px var(--robot-eye-glow));
+}
+
+/* Detalles decorativos */
+.head-screw {
+    fill: var(--robot-metal-dark);
+}
+
+/* Elementos flotantes */
+.binary {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    fill: var(--robot-primary);
+    opacity: 0.6;
+}
+
+.circuit-node {
+    fill: var(--robot-secondary);
+    opacity: 0.5;
+}
+
+/* ===================================
+   Animaciones
+   =================================== */
+
+/* Parpadeo de ojos */
+.robot-eyes {
+    transform-origin: center;
+}
+
+@keyframes blink {
+    0%, 45%, 55%, 100% {
+        transform: scaleY(1);
+    }
+    50% {
+        transform: scaleY(0.1);
+    }
+}
+
+.robot-eyes {
+    animation: blink 4s ease-in-out infinite;
+}
+
+/* Antena pulsante */
+@keyframes antennaPulse {
+    0%, 100% {
+        opacity: 0.6;
+        r: 6;
+    }
+    50% {
+        opacity: 1;
+        r: 8;
+    }
+}
+
+.antenna-light {
+    animation: antennaPulse 2s ease-in-out infinite;
+}
+
+/* Líneas de pantalla animadas */
+@keyframes screenPulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+.screen-line:nth-child(1) {
+    animation: screenPulse 2s ease-in-out infinite;
+}
+
+.screen-line:nth-child(2) {
+    animation: screenPulse 2s ease-in-out infinite 0.3s;
+}
+
+.screen-line:nth-child(3) {
+    animation: screenPulse 2s ease-in-out infinite 0.6s;
+}
+
+/* Elementos flotantes */
+@keyframes floatBinary1 {
+    0%, 100% {
+        transform: translate(0, 0);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translate(5px, -8px);
+        opacity: 0.9;
+    }
+}
+
+@keyframes floatBinary2 {
+    0%, 100% {
+        transform: translate(0, 0);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translate(-5px, 8px);
+        opacity: 0.9;
+    }
+}
+
+.binary:first-of-type {
+    animation: floatBinary1 4s ease-in-out infinite;
+}
+
+.binary:last-of-type {
+    animation: floatBinary2 5s ease-in-out infinite;
+}
+
+@keyframes pulseNode {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.3);
+        opacity: 0.8;
+    }
+}
+
+.circuit-node:first-of-type {
+    animation: pulseNode 3s ease-in-out infinite;
+}
+
+.circuit-node:last-of-type {
+    animation: pulseNode 3.5s ease-in-out infinite 0.5s;
+}
+
+/* ===================================
+   Interactividad Hover
+   =================================== */
+
+.robot-container:hover .antenna-light {
+    animation-duration: 0.5s;
+}
+
+.robot-container:hover .eye-iris {
+    filter: drop-shadow(0 0 12px var(--robot-eye-glow));
+}
+
+.robot-container:hover .robot-mouth {
+    opacity: 1;
+}
+
+/* ===================================
+   Responsive
+   =================================== */
+
+@media (max-width: 992px) {
+    .robot-container {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .robot-container {
+        max-width: 250px;
+    }
+
+    .binary {
+        font-size: 10px;
+    }
+}
+
+/* Reducir animaciones para preferencia de usuario */
+@media (prefers-reduced-motion: reduce) {
+    .robot-eyes,
+    .antenna-light,
+    .screen-line,
+    .binary,
+    .circuit-node {
+        animation: none;
+    }
+
+    .eye-iris,
+    .eye-pupil {
+        transition: none;
+    }
+}
