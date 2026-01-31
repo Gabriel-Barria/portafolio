@@ -575,21 +575,25 @@
    =================================== */
 @media (max-width: 480px) {
     .chat-widget {
-        bottom: 16px;
+        bottom: 80px;
         right: 16px;
     }
 
     .chat-fab {
-        width: 56px;
-        height: 56px;
+        width: 52px;
+        height: 52px;
+    }
+
+    .chat-fab i {
+        font-size: 1.3rem;
     }
 
     .chat-window {
         width: calc(100vw - 32px);
-        height: calc(100vh - 120px);
-        max-height: 500px;
+        height: calc(100vh - 160px);
+        max-height: 450px;
         right: 0;
-        bottom: 72px;
+        bottom: 70px;
     }
 }
 
