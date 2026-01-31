@@ -342,21 +342,27 @@
     z-index: 9999;
     pointer-events: none;
     opacity: 0;
-    transform: scale(0) translateY(-50px);
-    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    visibility: hidden;
+    transform: scale(0.5);
+    transition: opacity 0.4s ease-out,
+                visibility 0.4s ease-out,
+                transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .floating-eyes.visible {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    visibility: visible;
+    transform: scale(1);
     pointer-events: auto;
 }
 
 .floating-eyes-svg {
     width: 100%;
     height: 100%;
-    filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.4));
+    background: radial-gradient(ellipse at center, rgba(30, 41, 59, 0.9) 0%, rgba(30, 41, 59, 0.7) 60%, transparent 100%);
+    border-radius: 50%;
+    padding: 2px;
 }
 
 /* Cuencas de ojos flotantes */
@@ -459,11 +465,12 @@
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    width: 4px;
+    width: 5px;
     height: 0;
-    background: linear-gradient(to bottom, var(--robot-eye), transparent);
+    background: linear-gradient(to bottom, var(--robot-eye), rgba(0, 255, 136, 0.2), transparent);
     animation: projectorBeam 0.4s ease-out forwards;
-    opacity: 0.6;
+    opacity: 0.5;
+    border-radius: 3px;
 }
 
 @keyframes projectorBeam {
@@ -472,15 +479,15 @@
         opacity: 0;
     }
     100% {
-        height: 60px;
-        opacity: 0.4;
+        height: 50px;
+        opacity: 0.5;
     }
 }
 
 /* Acoplado completamente */
 .floating-eyes.coupled {
     pointer-events: auto;
-    transform: scale(1.2);
+    transform: scale(1.15);
 }
 
 .floating-eyes.coupled .floating-eye-iris {
@@ -508,20 +515,21 @@
     height: 80px;
     background: linear-gradient(to bottom,
         var(--robot-eye) 0%,
-        rgba(0, 255, 136, 0.3) 50%,
+        rgba(0, 255, 136, 0.4) 40%,
         transparent 100%);
-    opacity: 0.5;
+    opacity: 0.6;
     animation: projectorGlow 2s ease-in-out infinite;
+    border-radius: 3px;
 }
 
 @keyframes projectorGlow {
     0%, 100% {
-        opacity: 0.3;
-        height: 80px;
+        opacity: 0.4;
+        height: 60px;
     }
     50% {
-        opacity: 0.6;
-        height: 100px;
+        opacity: 0.7;
+        height: 80px;
     }
 }
 
@@ -548,18 +556,34 @@
 /* Responsive para ojos flotantes */
 @media (max-width: 768px) {
     .floating-eyes {
-        width: 50px;
-        height: 25px;
-        top: 80px; /* Debajo del navbar */
+        width: 60px;
+        height: 30px;
+        top: 80px;
         right: auto;
-        left: 15px; /* Mover a la izquierda para evitar hamburger menu */
+        left: 15px;
+    }
+
+    .floating-eyes.coupled::before,
+    .floating-eyes.projector-active::before {
+        height: 40px;
+    }
+
+    @keyframes projectorGlow {
+        0%, 100% {
+            opacity: 0.3;
+            height: 40px;
+        }
+        50% {
+            opacity: 0.5;
+            height: 50px;
+        }
     }
 }
 
 @media (max-width: 480px) {
     .floating-eyes {
-        width: 45px;
-        height: 22px;
+        width: 55px;
+        height: 28px;
         top: 75px;
         left: 10px;
     }
