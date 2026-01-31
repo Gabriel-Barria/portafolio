@@ -485,15 +485,11 @@ function initializeRobot() {
         }
     }
 
-    // Actualizar estado general
-    function updateState() {
-        const visibleRobot = getVisibleRobot();
-
-        if (visibleRobot) {
-            if (!isCoupled || currentRobot?.id !== visibleRobot.id) {
-                coupleToRobot(visibleRobot);
-            } else {
-                updateCoupledPosition();
+    // Manejar cambio de robot visible
+    function handleRobotChange(robot) {
+        if (robot) {
+            if (!isCoupled || currentRobot?.id !== robot.id) {
+                coupleToRobot(robot);
             }
         } else {
             if (isCoupled) {
@@ -501,9 +497,37 @@ function initializeRobot() {
             }
             floatingEyes.classList.add('visible');
         }
-
-        updateEyeTracking();
     }
+
+    // Usar IntersectionObserver para detectar cambios de sección (más eficiente)
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.3 // 30% visible
+    };
+
+    const robotObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const robot = robots.find(r => r.container === entry.target);
+            if (!robot) return;
+
+            if (entry.isIntersecting) {
+                // Robot entró al viewport
+                handleRobotChange(robot);
+            } else if (currentRobot?.id === robot.id) {
+                // El robot actual salió del viewport
+                const visibleRobot = getVisibleRobot();
+                handleRobotChange(visibleRobot);
+            }
+        });
+    }, observerOptions);
+
+    // Observar cada robot
+    robots.forEach(robot => {
+        if (robot.container) {
+            robotObserver.observe(robot.container);
+        }
+    });
 
     // Event listeners
     document.addEventListener('mousemove', (e) => {
@@ -511,16 +535,6 @@ function initializeRobot() {
         currentMouseY = e.clientY;
         updateEyeTracking();
     });
-
-    let scrollTimeout;
-    window.addEventListener('scroll', () => {
-        if (!scrollTimeout) {
-            scrollTimeout = setTimeout(() => {
-                updateState();
-                scrollTimeout = null;
-            }, 50);
-        }
-    }, { passive: true });
 
     // Click en ojos = parpadeo
     floatingEyes.addEventListener('click', () => {
@@ -535,15 +549,13 @@ function initializeRobot() {
         });
     });
 
-    // Inicializar
-    updateState();
-
-    // Actualizar en resize
-    window.addEventListener('resize', () => {
-        if (isCoupled) {
-            updateCoupledPosition();
-        }
-    });
+    // Inicializar - verificar estado inicial
+    const initialRobot = getVisibleRobot();
+    if (initialRobot) {
+        handleRobotChange(initialRobot);
+    } else {
+        floatingEyes.classList.add('visible');
+    }
 }
 
 // ===================================
