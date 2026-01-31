@@ -55,10 +55,14 @@
                         <span class="typed-text"></span>
                         <span class="cursor">|</span>
                     </p>
-                    <p class="hero-description">
-                        Desarrollador Full Stack apasionado por crear soluciones digitales innovadoras 
+                    <p class="hero-description collapsible-content" id="heroDescription">
+                        Desarrollador Full Stack apasionado por crear soluciones digitales innovadoras
                         y experiencias de usuario excepcionales.
                     </p>
+                    <button class="mobile-expand-btn" id="heroExpandBtn" data-target="heroDescription">
+                        <span>Más sobre mí</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
                     <div class="hero-buttons">
                         <a href="#projects" class="btn btn-primary">
                             <span>Ver Proyectos</span>
@@ -188,14 +192,20 @@
             </div>
             <div class="about-content">
                 <div class="about-text">
-                    <p class="about-paragraph">
-                        Soy un desarrollador Full Stack con sólida experiencia en tecnologías modernas. 
-                        Me especializo en crear soluciones web robustas, escalables y con excelente UX/UI.
-                    </p>
-                    <p class="about-paragraph">
-                        Mi enfoque está en escribir código limpio, mantenible y seguir las mejores prácticas 
-                        de desarrollo. Disfruto trabajar en equipo y siempre estoy aprendiendo nuevas tecnologías.
-                    </p>
+                    <div class="about-paragraphs collapsible-content" id="aboutParagraphs">
+                        <p class="about-paragraph">
+                            Soy un desarrollador Full Stack con sólida experiencia en tecnologías modernas.
+                            Me especializo en crear soluciones web robustas, escalables y con excelente UX/UI.
+                        </p>
+                        <p class="about-paragraph">
+                            Mi enfoque está en escribir código limpio, mantenible y seguir las mejores prácticas
+                            de desarrollo. Disfruto trabajar en equipo y siempre estoy aprendiendo nuevas tecnologías.
+                        </p>
+                    </div>
+                    <button class="mobile-expand-btn" id="aboutExpandBtn" data-target="aboutParagraphs">
+                        <span>Leer más</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
                     <div class="about-stats">
                         <div class="stat-item">
                             <div class="stat-number">3+</div>
@@ -392,6 +402,10 @@
             </div>
             <div class="projects-grid" id="projectsGrid">
                 <!-- Projects will be loaded dynamically via JS -->
+            </div>
+            <!-- Dots del carrusel (solo visible en mobile) -->
+            <div class="projects-carousel-dots" id="projectsCarouselDots">
+                <!-- Dots se generan dinámicamente -->
             </div>
         </div>
     </section>

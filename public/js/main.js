@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeContactForm();
     initializeBackToTop();
     initializeRobot();
+    initializeMobileCollapsibles();
+    initializeProjectsCarousel();
+    initializeSkillsCollapsible();
 });
 
 // ===================================
@@ -436,4 +439,139 @@ function initializeRobot() {
 
     // Inicializar
     updateEyesVisibility();
+}
+
+// ===================================
+// Mobile Collapsibles
+// ===================================
+function initializeMobileCollapsibles() {
+    const expandBtns = document.querySelectorAll('.mobile-expand-btn');
+
+    expandBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const targetId = btn.dataset.target;
+            const target = document.getElementById(targetId);
+
+            if (target) {
+                target.classList.toggle('expanded');
+                btn.classList.toggle('expanded');
+
+                // Cambiar texto del botón
+                const span = btn.querySelector('span');
+                if (span) {
+                    if (btn.classList.contains('expanded')) {
+                        span.textContent = 'Ver menos';
+                    } else {
+                        span.textContent = btn.dataset.originalText || 'Ver más';
+                    }
+                }
+            }
+        });
+
+        // Guardar texto original
+        const span = btn.querySelector('span');
+        if (span) {
+            btn.dataset.originalText = span.textContent;
+        }
+    });
+}
+
+// ===================================
+// Skills Collapsible (Mobile)
+// ===================================
+function initializeSkillsCollapsible() {
+    const skillCategories = document.querySelectorAll('.skill-category');
+
+    skillCategories.forEach(category => {
+        const header = category.querySelector('.category-header');
+
+        if (header) {
+            header.addEventListener('click', () => {
+                // Solo funciona en mobile
+                if (window.innerWidth <= 768) {
+                    // Cerrar otras categorías (accordion behavior)
+                    skillCategories.forEach(other => {
+                        if (other !== category && other.classList.contains('expanded')) {
+                            other.classList.remove('expanded');
+                        }
+                    });
+
+                    // Toggle actual
+                    category.classList.toggle('expanded');
+                }
+            });
+        }
+    });
+}
+
+// ===================================
+// Projects Carousel (Mobile)
+// ===================================
+function initializeProjectsCarousel() {
+    const projectsGrid = document.getElementById('projectsGrid');
+    const dotsContainer = document.getElementById('projectsCarouselDots');
+
+    if (!projectsGrid || !dotsContainer) return;
+
+    // Esperar a que los proyectos se carguen
+    const observer = new MutationObserver(() => {
+        const cards = projectsGrid.querySelectorAll('.project-card');
+        if (cards.length > 0) {
+            setupCarouselDots(cards);
+            observer.disconnect();
+        }
+    });
+
+    observer.observe(projectsGrid, { childList: true });
+
+    function setupCarouselDots(cards) {
+        // Crear dots
+        dotsContainer.innerHTML = '';
+        cards.forEach((_, index) => {
+            const dot = document.createElement('button');
+            dot.className = 'carousel-dot' + (index === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', `Ir al proyecto ${index + 1}`);
+            dot.addEventListener('click', () => {
+                cards[index].scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'center'
+                });
+            });
+            dotsContainer.appendChild(dot);
+        });
+
+        // Actualizar dots al hacer scroll
+        let scrollTimeout;
+        projectsGrid.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                updateActiveDot(cards);
+            }, 100);
+        }, { passive: true });
+    }
+
+    function updateActiveDot(cards) {
+        const dots = dotsContainer.querySelectorAll('.carousel-dot');
+        const gridRect = projectsGrid.getBoundingClientRect();
+        const gridCenter = gridRect.left + gridRect.width / 2;
+
+        let closestIndex = 0;
+        let closestDistance = Infinity;
+
+        cards.forEach((card, index) => {
+            const cardRect = card.getBoundingClientRect();
+            const cardCenter = cardRect.left + cardRect.width / 2;
+            const distance = Math.abs(cardCenter - gridCenter);
+
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestIndex = index;
+            }
+        });
+
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === closestIndex);
+        });
+    }
 }

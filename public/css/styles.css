@@ -1281,21 +1281,374 @@ body.chat-active .back-to-top {
     .section {
         padding: 60px 0;
     }
-    
+
     .hero {
         padding-top: 60px;
     }
-    
+
     .section-title {
         font-size: 2rem;
     }
-    
+
     .image-placeholder {
         font-size: 5rem;
     }
-    
+
     .footer-links {
         grid-template-columns: 1fr;
         gap: 1.5rem;
+    }
+}
+
+/* ===================================
+   Mobile UX - Contenido Colapsable
+   =================================== */
+
+/* Estilos base para colapsables (ocultos en desktop) */
+.mobile-expand-btn {
+    display: none;
+}
+
+.mobile-summary {
+    display: none;
+}
+
+.projects-carousel-dots {
+    display: none;
+}
+
+/* Mobile: Activar sistema colapsable */
+@media (max-width: 768px) {
+    /* Botón expandir */
+    .mobile-expand-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.25rem;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-full);
+        color: var(--primary);
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 1rem;
+    }
+
+    .mobile-expand-btn:hover {
+        background: var(--primary);
+        color: white;
+    }
+
+    .mobile-expand-btn i {
+        transition: transform 0.3s ease;
+    }
+
+    .mobile-expand-btn.expanded i {
+        transform: rotate(180deg);
+    }
+
+    /* Contenido colapsable */
+    .collapsible-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out, opacity 0.3s ease;
+        opacity: 0;
+    }
+
+    .collapsible-content.expanded {
+        max-height: 1000px;
+        opacity: 1;
+        transition: max-height 0.5s ease-in, opacity 0.3s ease;
+    }
+
+    /* Hero Section Mobile */
+    .hero-description {
+        display: none;
+    }
+
+    .hero-content {
+        gap: 1.5rem;
+    }
+
+    .hero-text {
+        order: 2;
+    }
+
+    .hero-image {
+        order: 1;
+    }
+
+    .hero-buttons {
+        gap: 0.75rem;
+    }
+
+    .hero-social {
+        margin-top: 1rem;
+    }
+
+    /* About Section Mobile */
+    .about-content {
+        gap: 1.5rem;
+    }
+
+    .about-paragraphs {
+        margin-bottom: 0;
+    }
+
+    .about-paragraphs.expanded .about-paragraph {
+        display: block;
+    }
+
+    .about-image {
+        order: -1;
+    }
+
+    .about-stats {
+        margin-top: 1rem;
+        gap: 0.75rem;
+    }
+
+    .stat-item {
+        padding: 1rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .stat-label {
+        font-size: 0.8rem;
+    }
+
+    /* Skills Section Mobile - Categorías colapsables */
+    .skill-category {
+        padding: 0;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .skill-category .category-header {
+        background: var(--bg-primary);
+        padding: 1rem 1.25rem;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-bottom: 0;
+    }
+
+    .skill-category .category-header:hover {
+        background: var(--bg-secondary);
+    }
+
+    .skill-category .category-header i {
+        font-size: 1.5rem;
+    }
+
+    .skill-category .category-header h3 {
+        font-size: 1.1rem;
+        flex: 1;
+    }
+
+    .skill-category .category-header::after {
+        content: '\f078';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        color: var(--text-tertiary);
+        transition: transform 0.3s ease;
+    }
+
+    .skill-category.expanded .category-header::after {
+        transform: rotate(180deg);
+    }
+
+    .skill-category .skills-list {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out, padding 0.3s ease;
+        padding: 0 1rem;
+        background: var(--bg-secondary);
+        border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+        margin-top: -0.5rem;
+    }
+
+    .skill-category.expanded .skills-list {
+        max-height: 500px;
+        padding: 1rem;
+        transition: max-height 0.5s ease-in, padding 0.3s ease;
+    }
+
+    .skills-grid {
+        gap: 1rem;
+    }
+
+    /* Projects Section Mobile - Carrusel */
+    .projects-filter {
+        display: none;
+    }
+
+    .projects-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 1rem;
+        padding: 0.5rem;
+        margin: 0 -1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .projects-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .projects-grid .project-card {
+        flex: 0 0 85%;
+        scroll-snap-align: center;
+        margin: 0;
+    }
+
+    .projects-carousel-dots {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 1rem;
+    }
+
+    .carousel-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--text-tertiary);
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .carousel-dot.active {
+        background: var(--primary);
+        transform: scale(1.3);
+    }
+
+    /* Contact Section Mobile */
+    .contact-robot-container {
+        gap: 1rem;
+    }
+
+    .contact-robot {
+        width: 180px;
+    }
+
+    .robot-speech-bubble {
+        white-space: normal;
+        max-width: 180px;
+        text-align: center;
+        padding: 0.75rem 1rem;
+        font-size: 0.85rem;
+        top: -30px;
+    }
+
+    .contact-option-card {
+        padding: 1.25rem;
+    }
+
+    .contact-option-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .contact-option-card h3 {
+        font-size: 1rem;
+    }
+
+    .contact-option-card p {
+        font-size: 0.8rem;
+    }
+
+    /* Section headers más compactos */
+    .section-header {
+        margin-bottom: 2rem;
+    }
+
+    .section-description {
+        font-size: 0.95rem;
+        display: none;
+    }
+
+    .section-label {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    /* Footer compacto */
+    .footer-brand h3 {
+        font-size: 1.4rem;
+    }
+
+    .footer-column h4 {
+        font-size: 1rem;
+    }
+}
+
+/* Mobile pequeño (480px) */
+@media (max-width: 480px) {
+    .section {
+        padding: 40px 0;
+    }
+
+    .section-title {
+        font-size: 1.75rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+        min-height: 2rem;
+    }
+
+    .btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+    }
+
+    .projects-grid .project-card {
+        flex: 0 0 92%;
+    }
+
+    .contact-robot {
+        width: 150px;
+    }
+
+    .robot-speech-bubble {
+        max-width: 150px;
+        font-size: 0.8rem;
+    }
+
+    .about-stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+    }
+
+    .stat-item {
+        padding: 0.75rem 0.5rem;
+    }
+
+    .stat-number {
+        font-size: 1.5rem;
+    }
+
+    .stat-label {
+        font-size: 0.7rem;
     }
 }

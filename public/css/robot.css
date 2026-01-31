@@ -282,13 +282,34 @@
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
     .robot-container {
-        max-width: 250px;
+        max-width: 200px;
+    }
+
+    /* Robot más prominente en hero mobile */
+    .hero-image-wrapper {
+        display: flex;
+        justify-content: center;
     }
 
     .binary {
         font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .robot-container {
+        max-width: 160px;
+    }
+
+    .binary {
+        font-size: 9px;
+    }
+
+    /* Ocultar elementos decorativos en mobile pequeño */
+    .floating-circuits {
+        opacity: 0.5;
     }
 }
 
@@ -390,19 +411,20 @@
 /* Responsive para ojos flotantes */
 @media (max-width: 768px) {
     .floating-eyes {
-        width: 60px;
-        height: 30px;
-        top: 80px; /* Debajo del navbar (70px + margen) */
-        right: 15px;
+        width: 50px;
+        height: 25px;
+        top: 80px; /* Debajo del navbar */
+        right: auto;
+        left: 15px; /* Mover a la izquierda para evitar hamburger menu */
     }
 }
 
 @media (max-width: 480px) {
     .floating-eyes {
-        width: 50px;
-        height: 25px;
-        top: 75px; /* Debajo del navbar */
-        right: 10px;
+        width: 45px;
+        height: 22px;
+        top: 75px;
+        left: 10px;
     }
 }
 
