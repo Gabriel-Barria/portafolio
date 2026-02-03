@@ -143,19 +143,21 @@
     <!-- Visor -->
     <rect x="45" y="48" width="110" height="55" rx="27" fill="url(#visorGrad)"/>
 
-    <!-- Ojos estilo Eilik (arcos felices) -->
+    <!-- Ojos -->
     <g class="robot-eyes-about">
-      <!-- Ojo izquierdo - arco curvo feliz -->
-      <path d="M 55 82 Q 75 55, 95 82" fill="none" stroke="#006666" stroke-width="14" stroke-linecap="round"/>
-      <path d="M 58 82 Q 75 60, 92 82" fill="none" stroke="#00d4d4" stroke-width="9" stroke-linecap="round" filter="url(#glow)">
+      <!-- Ojo izquierdo -->
+      <circle cx="75" cy="75" r="18" fill="#006666" stroke="#004d4d" stroke-width="2"/>
+      <circle cx="75" cy="75" r="13" fill="#00d4d4" filter="url(#glow)">
         <animate attributeName="opacity" values="0.9;1;0.9" dur="1.5s" repeatCount="indefinite"/>
-      </path>
+      </circle>
+      <circle cx="70" cy="70" r="4" fill="white" opacity="0.9"/>
 
-      <!-- Ojo derecho - arco curvo feliz -->
-      <path d="M 105 82 Q 125 55, 145 82" fill="none" stroke="#006666" stroke-width="14" stroke-linecap="round"/>
-      <path d="M 108 82 Q 125 60, 142 82" fill="none" stroke="#00d4d4" stroke-width="9" stroke-linecap="round" filter="url(#glow)">
+      <!-- Ojo derecho -->
+      <circle cx="125" cy="75" r="18" fill="#006666" stroke="#004d4d" stroke-width="2"/>
+      <circle cx="125" cy="75" r="13" fill="#00d4d4" filter="url(#glow)">
         <animate attributeName="opacity" values="0.9;1;0.9" dur="1.5s" repeatCount="indefinite"/>
-      </path>
+      </circle>
+      <circle cx="120" cy="70" r="4" fill="white" opacity="0.9"/>
     </g>
 
     <!-- Cuello -->
