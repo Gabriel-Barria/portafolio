@@ -1,15 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
   <defs>
-    <!-- Gradiente principal -->
-    <linearGradient id="robotGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#667eea"/>
-      <stop offset="100%" style="stop-color:#764ba2"/>
+    <!-- Gradiente cyan -->
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4d4"/>
+      <stop offset="100%" style="stop-color:#008b8b"/>
     </linearGradient>
 
-    <!-- Gradiente para la proyección -->
+    <!-- Gradiente para la proyeccion -->
     <linearGradient id="projectionGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#00ff88;stop-opacity:0.8"/>
-      <stop offset="100%" style="stop-color:#00ff88;stop-opacity:0"/>
+      <stop offset="0%" style="stop-color:#00d4d4;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#00d4d4;stop-opacity:0"/>
+    </linearGradient>
+
+    <!-- Gradiente visor -->
+    <linearGradient id="visorGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3d4f5f"/>
+      <stop offset="100%" style="stop-color:#1a252f"/>
     </linearGradient>
 
     <!-- Glow effect -->
@@ -28,171 +34,164 @@
   </defs>
 
   <!-- Fondo circular -->
-  <circle cx="250" cy="280" r="180" fill="#667eea" opacity="0.08"/>
+  <circle cx="250" cy="280" r="180" fill="#00d4d4" opacity="0.06"/>
 
-  <!-- Rayos de proyección desde los ojos del robot -->
-  <polygon points="120,320 200,50 250,50 150,310" fill="url(#projectionGrad)" opacity="0.3"/>
-  <polygon points="180,320 250,50 300,50 200,310" fill="url(#projectionGrad)" opacity="0.3"/>
+  <!-- Rayos de proyeccion desde los ojos del robot -->
+  <polygon points="120,310 200,50 250,50 150,300" fill="url(#projectionGrad)" opacity="0.25"/>
+  <polygon points="180,310 250,50 300,50 200,300" fill="url(#projectionGrad)" opacity="0.25"/>
 
   <!-- Pantalla proyectada (Matrix style) -->
   <g clip-path="url(#screenClip)">
     <!-- Fondo de pantalla -->
     <rect x="200" y="50" width="250" height="180" rx="10" fill="#0a0a0a"/>
-    <rect x="200" y="50" width="250" height="180" rx="10" fill="#00ff88" opacity="0.05"/>
+    <rect x="200" y="50" width="250" height="180" rx="10" fill="#00d4d4" opacity="0.03"/>
 
-    <!-- Código Matrix cayendo - Columna 1 -->
-    <text x="215" y="75" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.9">0</text>
-    <text x="215" y="95" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.7">1</text>
-    <text x="215" y="115" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.5">0</text>
-    <text x="215" y="135" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.3">1</text>
-    <text x="215" y="155" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.2">0</text>
+    <!-- Codigo Matrix cayendo -->
+    <text x="215" y="75" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.9">e</text>
+    <text x="215" y="95" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.7">&lt;</text>
+    <text x="215" y="115" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.5">f</text>
+    <text x="215" y="135" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.3">C</text>
+    <text x="215" y="155" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.2">1</text>
 
-    <!-- Columna 2 -->
-    <text x="235" y="85" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.8">1</text>
-    <text x="235" y="105" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.6">0</text>
-    <text x="235" y="125" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.4">1</text>
-    <text x="235" y="145" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.2">1</text>
+    <text x="235" y="85" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.8">1</text>
+    <text x="235" y="105" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.6">0</text>
+    <text x="235" y="125" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.4">1</text>
+    <text x="235" y="145" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.2">1</text>
 
-    <!-- Columna 3 -->
-    <text x="255" y="70" font-family="monospace" font-size="14" fill="#00ff88" opacity="1">&lt;</text>
-    <text x="255" y="90" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.8">/</text>
-    <text x="255" y="110" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.6">&gt;</text>
-    <text x="255" y="130" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.4">0</text>
-    <text x="255" y="150" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.2">1</text>
+    <text x="255" y="70" font-family="monospace" font-size="14" fill="#00d4d4" opacity="1">&lt;</text>
+    <text x="255" y="90" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.8">/</text>
+    <text x="255" y="110" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.6">&gt;</text>
+    <text x="255" y="130" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.4">0</text>
+    <text x="255" y="150" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.2">1</text>
 
-    <!-- Columna 4 -->
-    <text x="275" y="80" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.9">{</text>
-    <text x="275" y="100" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.7">}</text>
-    <text x="275" y="120" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.5">0</text>
-    <text x="275" y="140" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.3">1</text>
-    <text x="275" y="160" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.1">0</text>
+    <text x="275" y="80" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.9">{</text>
+    <text x="275" y="100" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.7">}</text>
+    <text x="275" y="120" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.5">0</text>
+    <text x="275" y="140" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.3">1</text>
+    <text x="275" y="160" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.1">0</text>
 
-    <!-- Columna 5 -->
-    <text x="295" y="65" font-family="monospace" font-size="14" fill="#00ff88" opacity="1">f</text>
-    <text x="295" y="85" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.8">n</text>
-    <text x="295" y="105" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.6">(</text>
-    <text x="295" y="125" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.4">)</text>
-    <text x="295" y="145" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.2">;</text>
+    <text x="295" y="65" font-family="monospace" font-size="14" fill="#00d4d4" opacity="1">f</text>
+    <text x="295" y="85" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.8">n</text>
+    <text x="295" y="105" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.6">(</text>
+    <text x="295" y="125" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.4">)</text>
+    <text x="295" y="145" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.2">;</text>
 
-    <!-- Columna 6 -->
-    <text x="315" y="75" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.85">1</text>
-    <text x="315" y="95" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.65">0</text>
-    <text x="315" y="115" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.45">0</text>
-    <text x="315" y="135" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.25">1</text>
+    <text x="315" y="75" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.85">1</text>
+    <text x="315" y="95" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.65">0</text>
+    <text x="315" y="115" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.45">0</text>
+    <text x="315" y="135" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.25">1</text>
 
-    <!-- Columna 7 -->
-    <text x="335" y="68" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.95">=</text>
-    <text x="335" y="88" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.75">&gt;</text>
-    <text x="335" y="108" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.55">1</text>
-    <text x="335" y="128" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.35">0</text>
-    <text x="335" y="148" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.15">1</text>
+    <text x="335" y="68" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.95">=</text>
+    <text x="335" y="88" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.75">&gt;</text>
+    <text x="335" y="108" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.55">1</text>
+    <text x="335" y="128" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.35">0</text>
+    <text x="335" y="148" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.15">1</text>
 
-    <!-- Columna 8 -->
-    <text x="355" y="78" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.9">[</text>
-    <text x="355" y="98" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.7">]</text>
-    <text x="355" y="118" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.5">0</text>
-    <text x="355" y="138" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.3">1</text>
+    <text x="355" y="78" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.9">[</text>
+    <text x="355" y="98" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.7">]</text>
+    <text x="355" y="118" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.5">0</text>
+    <text x="355" y="138" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.3">1</text>
 
-    <!-- Columna 9 -->
-    <text x="375" y="72" font-family="monospace" font-size="14" fill="#00ff88" opacity="1">c</text>
-    <text x="375" y="92" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.8">o</text>
-    <text x="375" y="112" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.6">d</text>
-    <text x="375" y="132" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.4">e</text>
-    <text x="375" y="152" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.2">;</text>
+    <text x="375" y="72" font-family="monospace" font-size="14" fill="#00d4d4" opacity="1">c</text>
+    <text x="375" y="92" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.8">o</text>
+    <text x="375" y="112" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.6">d</text>
+    <text x="375" y="132" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.4">e</text>
+    <text x="375" y="152" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.2">;</text>
 
-    <!-- Columna 10 -->
-    <text x="395" y="82" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.85">0</text>
-    <text x="395" y="102" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.65">1</text>
-    <text x="395" y="122" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.45">1</text>
-    <text x="395" y="142" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.25">0</text>
+    <text x="395" y="82" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.85">0</text>
+    <text x="395" y="102" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.65">1</text>
+    <text x="395" y="122" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.45">1</text>
+    <text x="395" y="142" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.25">0</text>
 
-    <!-- Columna 11 -->
-    <text x="415" y="70" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.9">i</text>
-    <text x="415" y="90" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.7">f</text>
-    <text x="415" y="110" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.5">(</text>
-    <text x="415" y="130" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.3">)</text>
-    <text x="415" y="150" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.1">0</text>
+    <text x="415" y="70" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.9">i</text>
+    <text x="415" y="90" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.7">f</text>
+    <text x="415" y="110" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.5">(</text>
+    <text x="415" y="130" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.3">)</text>
+    <text x="415" y="150" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.1">0</text>
 
-    <!-- Columna 12 -->
-    <text x="435" y="76" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.8">1</text>
-    <text x="435" y="96" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.6">0</text>
-    <text x="435" y="116" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.4">1</text>
-    <text x="435" y="136" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.2">0</text>
+    <text x="435" y="76" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.8">1</text>
+    <text x="435" y="96" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.6">0</text>
+    <text x="435" y="116" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.4">1</text>
+    <text x="435" y="136" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.2">0</text>
 
-    <!-- Líneas de código destacadas -->
-    <text x="210" y="185" font-family="monospace" font-size="11" fill="#00ff88" opacity="0.9">const dev = () =&gt; {</text>
-    <text x="210" y="200" font-family="monospace" font-size="11" fill="#00ff88" opacity="0.7">  return "Gabriel";</text>
-    <text x="210" y="215" font-family="monospace" font-size="11" fill="#00ff88" opacity="0.5">};</text>
+    <!-- Lineas de codigo destacadas -->
+    <text x="210" y="185" font-family="monospace" font-size="11" fill="#00d4d4" opacity="0.9">const dev = () =&gt; {</text>
+    <text x="210" y="200" font-family="monospace" font-size="11" fill="#00d4d4" opacity="0.7">  return "Gabriel";</text>
+    <text x="210" y="215" font-family="monospace" font-size="11" fill="#00d4d4" opacity="0.5">};</text>
 
     <!-- Scan line effect -->
-    <rect x="200" y="50" width="250" height="2" fill="#00ff88" opacity="0.1">
+    <rect x="200" y="50" width="250" height="2" fill="#00d4d4" opacity="0.1">
       <animate attributeName="y" values="50;230;50" dur="4s" repeatCount="indefinite"/>
     </rect>
   </g>
 
   <!-- Borde de pantalla con glow -->
-  <rect x="200" y="50" width="250" height="180" rx="10" fill="none" stroke="#00ff88" stroke-width="2" opacity="0.6" filter="url(#glow)"/>
+  <rect x="200" y="50" width="250" height="180" rx="10" fill="none" stroke="#00d4d4" stroke-width="2" opacity="0.5" filter="url(#glow)"/>
 
-  <!-- ROBOT -->
-  <!-- Cuerpo del robot -->
-  <g transform="translate(50, 220)">
-    <!-- Antena -->
-    <line x1="100" y1="50" x2="100" y2="25" stroke="#667eea" stroke-width="4" stroke-linecap="round"/>
-    <circle cx="100" cy="20" r="8" fill="#00ff88" filter="url(#glow)">
-      <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
-    </circle>
+  <!-- ROBOT - Nuevo estilo -->
+  <g transform="translate(50, 210)">
+    <!-- Cabeza (forma redondeada) -->
+    <ellipse cx="100" cy="70" rx="65" ry="55" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="2"/>
 
-    <!-- Cabeza -->
-    <rect x="40" y="50" width="120" height="90" rx="20" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
+    <!-- Linea decorativa cabeza -->
+    <path d="M 50 35 Q 100 15, 150 35" fill="none" stroke="#d1d9e0" stroke-width="1.5"/>
 
-    <!-- Ojos proyectando -->
-    <ellipse cx="70" cy="90" rx="18" ry="20" fill="#1e293b"/>
-    <ellipse cx="130" cy="90" rx="18" ry="20" fill="#1e293b"/>
+    <!-- Orejas cyan -->
+    <ellipse cx="28" cy="70" rx="14" ry="20" fill="url(#cyanGrad)"/>
+    <ellipse cx="172" cy="70" rx="14" ry="20" fill="url(#cyanGrad)"/>
 
-    <!-- Iris con glow (proyectando) -->
-    <circle cx="70" cy="90" r="10" fill="#00ff88" filter="url(#glow)">
-      <animate attributeName="opacity" values="0.8;1;0.8" dur="1.5s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="130" cy="90" r="10" fill="#00ff88" filter="url(#glow)">
-      <animate attributeName="opacity" values="0.8;1;0.8" dur="1.5s" repeatCount="indefinite"/>
-    </circle>
+    <!-- Visor -->
+    <rect x="45" y="48" width="110" height="55" rx="27" fill="url(#visorGrad)"/>
 
-    <!-- Pupilas -->
-    <circle cx="70" cy="90" r="4" fill="#0a0a0a"/>
-    <circle cx="130" cy="90" r="4" fill="#0a0a0a"/>
+    <!-- Ojos -->
+    <g class="robot-eyes-about">
+      <!-- Ojo izquierdo -->
+      <circle cx="75" cy="75" r="18" fill="#006666" stroke="#004d4d" stroke-width="2"/>
+      <circle cx="75" cy="75" r="13" fill="#00d4d4" filter="url(#glow)">
+        <animate attributeName="opacity" values="0.9;1;0.9" dur="1.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="70" cy="70" r="4" fill="white" opacity="0.9"/>
 
-    <!-- Boca sonriente -->
-    <path d="M 70 120 Q 100 140, 130 120" fill="none" stroke="url(#robotGrad)" stroke-width="4" stroke-linecap="round"/>
+      <!-- Ojo derecho -->
+      <circle cx="125" cy="75" r="18" fill="#006666" stroke="#004d4d" stroke-width="2"/>
+      <circle cx="125" cy="75" r="13" fill="#00d4d4" filter="url(#glow)">
+        <animate attributeName="opacity" values="0.9;1;0.9" dur="1.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="120" cy="70" r="4" fill="white" opacity="0.9"/>
+    </g>
+
+    <!-- Boca -->
+    <line x1="80" y1="112" x2="120" y2="112" stroke="#4a5568" stroke-width="3" stroke-linecap="round"/>
 
     <!-- Cuello -->
-    <rect x="80" y="140" width="40" height="15" rx="5" fill="#e2e8f0"/>
+    <rect x="80" y="123" width="40" height="12" rx="4" fill="#e2e8f0" stroke="#d1d9e0" stroke-width="1"/>
 
     <!-- Cuerpo -->
-    <rect x="30" y="155" width="140" height="100" rx="15" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
+    <rect x="40" y="135" width="120" height="80" rx="18" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="2"/>
 
-    <!-- Pantalla del pecho -->
-    <rect x="50" y="170" width="100" height="60" rx="8" fill="#1e293b"/>
+    <!-- Panel cyan pecho -->
+    <rect x="58" y="150" width="84" height="45" rx="10" fill="url(#cyanGrad)" opacity="0.8"/>
 
-    <!-- Corazón/Core brillante -->
-    <circle cx="100" cy="200" r="15" fill="url(#robotGrad)" opacity="0.8">
-      <animate attributeName="r" values="15;18;15" dur="2s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
-    </circle>
-    <text x="100" y="205" font-family="monospace" font-size="12" fill="white" text-anchor="middle">&lt;/&gt;</text>
+    <!-- Icono codigo en pecho -->
+    <text x="100" y="180" font-family="monospace" font-size="18" fill="#f0f4f8" text-anchor="middle" font-weight="bold">&lt;/&gt;</text>
+
+    <!-- Hombros cyan -->
+    <circle cx="40" cy="145" r="10" fill="url(#cyanGrad)"/>
+    <circle cx="160" cy="145" r="10" fill="url(#cyanGrad)"/>
 
     <!-- Brazos -->
-    <rect x="-10" y="165" width="35" height="15" rx="7" fill="#e2e8f0"/>
-    <rect x="175" y="165" width="35" height="15" rx="7" fill="#e2e8f0"/>
+    <rect x="10" y="150" width="20" height="40" rx="10" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="1"/>
+    <rect x="170" y="150" width="20" height="40" rx="10" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="1"/>
   </g>
 
-  <!-- Partículas flotantes de código -->
-  <text x="60" y="120" font-family="monospace" font-size="16" fill="#00ff88" opacity="0.6">01</text>
-  <text x="440" y="280" font-family="monospace" font-size="14" fill="#00ff88" opacity="0.5">10</text>
-  <text x="470" y="150" font-family="monospace" font-size="12" fill="#667eea" opacity="0.5">{}</text>
-  <text x="30" y="200" font-family="monospace" font-size="14" fill="#764ba2" opacity="0.4">=&gt;</text>
+  <!-- Particulas flotantes -->
+  <text x="60" y="120" font-family="monospace" font-size="16" fill="#00d4d4" opacity="0.5">01</text>
+  <text x="440" y="280" font-family="monospace" font-size="14" fill="#00d4d4" opacity="0.4">10</text>
+  <text x="470" y="150" font-family="monospace" font-size="12" fill="#008b8b" opacity="0.4">{}</text>
+  <text x="30" y="200" font-family="monospace" font-size="14" fill="#008b8b" opacity="0.3">=&gt;</text>
 
-  <!-- Círculos decorativos -->
-  <circle cx="480" cy="400" r="15" fill="#667eea" opacity="0.2"/>
-  <circle cx="30" cy="450" r="20" fill="#764ba2" opacity="0.2"/>
-  <circle cx="460" cy="80" r="12" fill="#00ff88" opacity="0.3"/>
+  <!-- Circulos decorativos -->
+  <circle cx="480" cy="400" r="15" fill="#00d4d4" opacity="0.15"/>
+  <circle cx="30" cy="450" r="20" fill="#008b8b" opacity="0.15"/>
+  <circle cx="460" cy="80" r="12" fill="#00d4d4" opacity="0.2"/>
 </svg>
