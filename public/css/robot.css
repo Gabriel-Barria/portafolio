@@ -148,15 +148,25 @@
 
 /* Parpadeo de ojos - Hero Robot */
 .robot-eyes {
-    transform-origin: center;
+    transform-box: fill-box;
+    transform-origin: center center;
     animation: blink 4s ease-in-out infinite;
 }
 
 /* Parpadeo de ojos - Contact Robot */
 .robot-eyes-contact {
-    transform-origin: center;
+    transform-box: fill-box;
+    transform-origin: center center;
     animation: blink 3.5s ease-in-out infinite;
     animation-delay: 0.5s;
+}
+
+/* Parpadeo de ojos - About Robot */
+.robot-eyes-about {
+    transform-box: fill-box;
+    transform-origin: center center;
+    animation: blink 4.5s ease-in-out infinite;
+    animation-delay: 1s;
 }
 
 @keyframes blink {
