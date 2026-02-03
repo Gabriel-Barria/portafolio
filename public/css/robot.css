@@ -1,26 +1,28 @@
 /* ===================================
-   Robot Observador - Estilos
+   Robot - Estilos
    =================================== */
 
 /* Variables del robot */
 :root {
     --robot-primary: #667eea;
     --robot-secondary: #764ba2;
-    --robot-metal: #e2e8f0;
+    --robot-metal: #e8edf3;
     --robot-metal-dark: #94a3b8;
-    --robot-dark: #334155;
-    --robot-eye: #00ff88;
-    --robot-eye-glow: rgba(0, 255, 136, 0.6);
-    --robot-screen: #1e293b;
+    --robot-dark: #2d3748;
+    --robot-eye: #00d4d4;
+    --robot-eye-glow: rgba(0, 212, 212, 0.6);
+    --robot-eye-ring: #008b8b;
+    --robot-screen: #1a202c;
 }
 
 [data-theme="dark"] {
-    --robot-metal: #475569;
-    --robot-metal-dark: #334155;
-    --robot-dark: #1e293b;
-    --robot-eye: #00ffcc;
-    --robot-eye-glow: rgba(0, 255, 204, 0.8);
-    --robot-screen: #0f172a;
+    --robot-metal: #4a5568;
+    --robot-metal-dark: #2d3748;
+    --robot-dark: #1a202c;
+    --robot-eye: #00e5e5;
+    --robot-eye-glow: rgba(0, 229, 229, 0.7);
+    --robot-eye-ring: #00a3a3;
+    --robot-screen: #0d1117;
 }
 
 /* Contenedor principal */
@@ -31,7 +33,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
 }
 
 /* SVG del robot */
@@ -57,38 +58,30 @@
     stroke-width: 2;
 }
 
-/* Cuencas de los ojos */
+/* Cuencas de los ojos - más oscuras para contraste */
 .eye-socket {
     fill: var(--robot-screen);
     stroke: var(--robot-dark);
-    stroke-width: 1;
+    stroke-width: 2;
 }
 
-/* Iris de los ojos */
+/* Iris de los ojos - cyan brillante */
 .eye-iris {
     fill: var(--robot-eye);
+    stroke: var(--robot-eye-ring);
+    stroke-width: 2;
     filter: drop-shadow(0 0 8px var(--robot-eye-glow));
-    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: center;
 }
 
-/* Pupila */
+/* Pupila - centro oscuro */
 .eye-pupil {
     fill: var(--robot-dark);
-    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: center;
 }
 
-/* Reflejo del ojo - sigue la pupila */
-.eye-reflection {
-    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: center;
-}
-
-/* Reflejo del ojo */
+/* Reflejo del ojo - más visible */
 .eye-reflection {
     fill: white;
-    opacity: 0.6;
+    opacity: 0.8;
 }
 
 /* Boca LED */
@@ -150,25 +143,29 @@
 }
 
 /* ===================================
-   Animaciones
+   Animaciones de Parpadeo
    =================================== */
 
-/* Parpadeo de ojos */
+/* Parpadeo de ojos - Hero Robot */
 .robot-eyes {
     transform-origin: center;
+    animation: blink 4s ease-in-out infinite;
+}
+
+/* Parpadeo de ojos - Contact Robot */
+.robot-eyes-contact {
+    transform-origin: center;
+    animation: blink 3.5s ease-in-out infinite;
+    animation-delay: 0.5s;
 }
 
 @keyframes blink {
-    0%, 45%, 55%, 100% {
+    0%, 42%, 58%, 100% {
         transform: scaleY(1);
     }
     50% {
-        transform: scaleY(0.1);
+        transform: scaleY(0.05);
     }
-}
-
-.robot-eyes {
-    animation: blink 4s ease-in-out infinite;
 }
 
 /* Antena pulsante */
@@ -256,6 +253,25 @@
 }
 
 /* ===================================
+   Robot de Contacto - Ojos
+   =================================== */
+
+/* Iris del robot de contacto - mismo estilo */
+.eye-iris-contact {
+    fill: var(--robot-eye);
+    stroke: var(--robot-eye-ring);
+    stroke-width: 1.5;
+    filter: drop-shadow(0 0 8px var(--robot-eye-glow));
+}
+
+/* Antena del robot de contacto */
+.antenna-light-contact {
+    fill: var(--robot-eye);
+    filter: drop-shadow(0 0 10px var(--robot-eye-glow));
+    animation: antennaPulse 2s ease-in-out infinite;
+}
+
+/* ===================================
    Interactividad Hover
    =================================== */
 
@@ -287,7 +303,6 @@
         max-width: 200px;
     }
 
-    /* Robot más prominente en hero mobile */
     .hero-image-wrapper {
         display: flex;
         justify-content: center;
@@ -307,7 +322,6 @@
         font-size: 9px;
     }
 
-    /* Ocultar elementos decorativos en mobile pequeño */
     .floating-circuits {
         opacity: 0.5;
     }
@@ -316,189 +330,12 @@
 /* Reducir animaciones para preferencia de usuario */
 @media (prefers-reduced-motion: reduce) {
     .robot-eyes,
+    .robot-eyes-contact,
     .antenna-light,
+    .antenna-light-contact,
     .screen-line,
     .binary,
     .circuit-node {
-        animation: none;
-    }
-
-    .eye-iris,
-    .eye-pupil {
-        transition: none;
-    }
-}
-
-/* ===================================
-   Ojos Flotantes (Fixed)
-   =================================== */
-
-.floating-eyes {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 80px;
-    height: 40px;
-    z-index: 9999;
-    pointer-events: none;
-    opacity: 0;
-    transform: scale(0) translateY(-50px);
-    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.floating-eyes.visible {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-    pointer-events: auto;
-}
-
-.floating-eyes-svg {
-    width: 100%;
-    height: 100%;
-    filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.3));
-}
-
-/* Cuencas de ojos flotantes */
-.floating-eye-socket {
-    fill: var(--robot-screen);
-    stroke: var(--robot-dark);
-    stroke-width: 2;
-}
-
-/* Iris flotante */
-.floating-eye-iris {
-    fill: var(--robot-eye);
-    filter: drop-shadow(0 0 8px var(--robot-eye-glow));
-    transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Pupila flotante */
-.floating-eye-pupil {
-    fill: var(--robot-dark);
-    transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Reflejo */
-.floating-eye-reflection {
-    fill: white;
-    opacity: 0.6;
-}
-
-/* Parpadeo de ojos flotantes */
-.floating-eyes .floating-eye {
-    transform-origin: center;
-}
-
-@keyframes floatingBlink {
-    0%, 45%, 55%, 100% {
-        transform: scaleY(1);
-    }
-    50% {
-        transform: scaleY(0.1);
-    }
-}
-
-.floating-eyes.visible .floating-eye {
-    animation: floatingBlink 3.5s ease-in-out infinite;
-}
-
-/* Hover en ojos flotantes */
-.floating-eyes:hover .floating-eye-iris {
-    filter: drop-shadow(0 0 12px var(--robot-eye-glow));
-}
-
-/* ===================================
-   Teletransporte de Ojos
-   =================================== */
-
-/* Animación de cerrar ojos (salida) */
-@keyframes teleportOut {
-    0% {
-        transform: scaleY(1);
-    }
-    100% {
-        transform: scaleY(0);
-    }
-}
-
-/* Animación de abrir ojos (entrada) */
-@keyframes teleportIn {
-    0% {
-        transform: scaleY(0);
-    }
-    100% {
-        transform: scaleY(1);
-    }
-}
-
-/* Ojos flotantes - teletransporte salida */
-.floating-eyes.teleporting-out .floating-eye {
-    animation: teleportOut 0.15s ease-in forwards !important;
-}
-
-/* Ojos flotantes - teletransporte entrada */
-.floating-eyes.teleporting-in .floating-eye {
-    animation: teleportIn 0.2s ease-out forwards !important;
-}
-
-/* Ojos de robots ocultos */
-.robot-eyes.eyes-hidden,
-.robot-eyes-contact.eyes-hidden {
-    opacity: 0;
-}
-
-/* Ojos del robot hero - teletransporte */
-.robot-eyes.teleporting-out {
-    animation: teleportOut 0.15s ease-in forwards;
-    transform-origin: center;
-}
-
-.robot-eyes.teleporting-in {
-    opacity: 1;
-    animation: teleportIn 0.2s ease-out forwards;
-    transform-origin: center;
-}
-
-/* Ojos del robot contact - teletransporte */
-.robot-eyes-contact.teleporting-out {
-    animation: teleportOut 0.15s ease-in forwards;
-    transform-origin: center;
-}
-
-.robot-eyes-contact.teleporting-in {
-    opacity: 1;
-    animation: teleportIn 0.2s ease-out forwards;
-    transform-origin: center;
-}
-
-/* Responsive para ojos flotantes */
-@media (max-width: 768px) {
-    .floating-eyes {
-        width: 50px;
-        height: 25px;
-        top: 80px; /* Debajo del navbar */
-        right: auto;
-        left: 15px; /* Mover a la izquierda para evitar hamburger menu */
-    }
-}
-
-@media (max-width: 480px) {
-    .floating-eyes {
-        width: 45px;
-        height: 22px;
-        top: 75px;
-        left: 10px;
-    }
-}
-
-/* Reducir animaciones */
-@media (prefers-reduced-motion: reduce) {
-    .floating-eyes {
-        transition: opacity 0.2s ease;
-    }
-
-    .floating-eyes.visible .floating-eye {
         animation: none;
     }
 }
