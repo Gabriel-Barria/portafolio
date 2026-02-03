@@ -280,11 +280,40 @@ function throttle(func, limit) {
 }
 
 // ===================================
-// Robots con Parpadeo Simple
+// Robots Interactivos - Desarmado/Armado
 // ===================================
 function initializeRobot() {
-    // Solo parpadeo automático, sin seguimiento ni ojos flotantes
-    // Los ojos están fijos en cada robot y solo parpadean
+    const interactiveRobots = document.querySelectorAll('.robot-interactive');
+
+    interactiveRobots.forEach(robot => {
+        let isAnimating = false;
+
+        const toggleDisassemble = () => {
+            if (isAnimating) return;
+
+            isAnimating = true;
+            robot.classList.add('disassembled');
+
+            // Volver a armar después de un tiempo
+            setTimeout(() => {
+                robot.classList.remove('disassembled');
+
+                // Esperar a que termine la animación de armado
+                setTimeout(() => {
+                    isAnimating = false;
+                }, 600);
+            }, 1200);
+        };
+
+        // Click para desktop
+        robot.addEventListener('click', toggleDisassemble);
+
+        // Touch para mobile (evitar doble disparo)
+        robot.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            toggleDisassemble();
+        }, { passive: false });
+    });
 }
 
 // ===================================

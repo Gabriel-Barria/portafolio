@@ -339,3 +339,84 @@
         animation: none;
     }
 }
+
+/* ===================================
+   Animación de Desarmado/Armado
+   =================================== */
+
+/* Robot interactivo - cursor pointer */
+.robot-interactive {
+    cursor: pointer;
+}
+
+/* Todas las partes del robot tienen transición suave */
+.robot-part {
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity 0.4s ease;
+}
+
+/* Estado desarmado - Hero Robot */
+.robot-interactive.disassembled .robot-head {
+    transform: translateY(-25px) rotate(-5deg);
+}
+
+.robot-interactive.disassembled .robot-ear-left {
+    transform: translate(-20px, -15px) rotate(-15deg);
+}
+
+.robot-interactive.disassembled .robot-ear-right {
+    transform: translate(20px, -15px) rotate(15deg);
+}
+
+.robot-interactive.disassembled .robot-neck {
+    transform: translateY(-8px);
+    opacity: 0.7;
+}
+
+.robot-interactive.disassembled .robot-body {
+    transform: translateY(20px);
+}
+
+.robot-interactive.disassembled .robot-shoulder-left {
+    transform: translate(-15px, 10px) rotate(-20deg);
+}
+
+.robot-interactive.disassembled .robot-shoulder-right {
+    transform: translate(15px, 10px) rotate(20deg);
+}
+
+/* Estado desarmado - Contact Robot (más partes) */
+.robot-interactive.disassembled .robot-arm-left {
+    transform: translate(-30px, 15px) rotate(-25deg);
+}
+
+.robot-interactive.disassembled .robot-arm-right {
+    transform: translate(30px, 15px) rotate(25deg);
+}
+
+.robot-interactive.disassembled .robot-leg-left {
+    transform: translate(-15px, 25px) rotate(-10deg);
+}
+
+.robot-interactive.disassembled .robot-leg-right {
+    transform: translate(15px, 25px) rotate(10deg);
+}
+
+/* Efecto hover cuando está armado */
+.robot-interactive:not(.disassembled):hover .robot-head {
+    transform: translateY(-3px);
+}
+
+.robot-interactive:not(.disassembled):hover .robot-ear-left {
+    transform: translateX(-3px);
+}
+
+.robot-interactive:not(.disassembled):hover .robot-ear-right {
+    transform: translateX(3px);
+}
+
+/* Glow extra cuando está desarmado */
+.robot-interactive.disassembled .eye-iris,
+.robot-interactive.disassembled .eye-iris-contact {
+    filter: drop-shadow(0 0 15px var(--robot-eye-glow));
+}

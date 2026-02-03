@@ -87,20 +87,17 @@
                 </div>
                 <div class="hero-image">
                     <div class="hero-image-wrapper">
-                        <div class="robot-container" id="robotContainer">
+                        <div class="robot-container robot-interactive" id="robotContainer">
                             <svg class="robot-svg" viewBox="0 0 200 220" aria-label="Robot amigable">
                                 <defs>
-                                    <!-- Gradiente cyan para acentos -->
                                     <linearGradient id="cyanGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                                         <stop offset="0%" style="stop-color:#00d4d4"/>
                                         <stop offset="100%" style="stop-color:#008b8b"/>
                                     </linearGradient>
-                                    <!-- Gradiente para visor -->
                                     <linearGradient id="visorGradient" x1="0%" y1="0%" x2="0%" y2="100%">
                                         <stop offset="0%" style="stop-color:#3d4f5f"/>
                                         <stop offset="100%" style="stop-color:#1a252f"/>
                                     </linearGradient>
-                                    <!-- Brillo de ojos -->
                                     <filter id="eyeGlow">
                                         <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
                                         <feMerge>
@@ -110,48 +107,42 @@
                                     </filter>
                                 </defs>
 
-                                <!-- Cabeza (forma redondeada) -->
-                                <ellipse cx="100" cy="70" rx="55" ry="50" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="2"/>
+                                <!-- Oreja izquierda -->
+                                <ellipse class="robot-part robot-ear-left" cx="40" cy="70" rx="12" ry="18" fill="url(#cyanGradient)"/>
 
-                                <!-- Línea decorativa superior de la cabeza -->
-                                <path d="M 60 40 Q 100 25, 140 40" fill="none" stroke="#d1d9e0" stroke-width="1.5"/>
+                                <!-- Oreja derecha -->
+                                <ellipse class="robot-part robot-ear-right" cx="160" cy="70" rx="12" ry="18" fill="url(#cyanGradient)"/>
 
-                                <!-- Orejas/laterales cyan -->
-                                <ellipse cx="40" cy="70" rx="12" ry="18" fill="url(#cyanGradient)"/>
-                                <ellipse cx="160" cy="70" rx="12" ry="18" fill="url(#cyanGradient)"/>
-
-                                <!-- Visor (área de los ojos) -->
-                                <rect x="55" y="50" width="90" height="50" rx="25" fill="url(#visorGradient)"/>
-
-                                <!-- Ojos -->
-                                <g class="robot-eyes">
-                                    <!-- Ojo izquierdo -->
-                                    <circle cx="80" cy="75" r="16" fill="#006666" stroke="#004d4d" stroke-width="2"/>
-                                    <circle cx="80" cy="75" r="12" fill="#00d4d4" filter="url(#eyeGlow)" class="eye-iris"/>
-                                    <circle cx="76" cy="71" r="4" fill="white" opacity="0.9" class="eye-reflection"/>
-
-                                    <!-- Ojo derecho -->
-                                    <circle cx="120" cy="75" r="16" fill="#006666" stroke="#004d4d" stroke-width="2"/>
-                                    <circle cx="120" cy="75" r="12" fill="#00d4d4" filter="url(#eyeGlow)" class="eye-iris"/>
-                                    <circle cx="116" cy="71" r="4" fill="white" opacity="0.9" class="eye-reflection"/>
+                                <!-- Cabeza -->
+                                <g class="robot-part robot-head">
+                                    <ellipse cx="100" cy="70" rx="55" ry="50" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="2"/>
+                                    <path d="M 60 40 Q 100 25, 140 40" fill="none" stroke="#d1d9e0" stroke-width="1.5"/>
+                                    <rect x="55" y="50" width="90" height="50" rx="25" fill="url(#visorGradient)"/>
+                                    <g class="robot-eyes">
+                                        <circle cx="80" cy="75" r="16" fill="#006666" stroke="#004d4d" stroke-width="2"/>
+                                        <circle cx="80" cy="75" r="12" fill="#00d4d4" filter="url(#eyeGlow)" class="eye-iris"/>
+                                        <circle cx="76" cy="71" r="4" fill="white" opacity="0.9" class="eye-reflection"/>
+                                        <circle cx="120" cy="75" r="16" fill="#006666" stroke="#004d4d" stroke-width="2"/>
+                                        <circle cx="120" cy="75" r="12" fill="#00d4d4" filter="url(#eyeGlow)" class="eye-iris"/>
+                                        <circle cx="116" cy="71" r="4" fill="white" opacity="0.9" class="eye-reflection"/>
+                                    </g>
                                 </g>
 
-
                                 <!-- Cuello -->
-                                <rect x="85" y="118" width="30" height="12" rx="3" fill="#e2e8f0" stroke="#d1d9e0" stroke-width="1"/>
+                                <rect class="robot-part robot-neck" x="85" y="118" width="30" height="12" rx="3" fill="#e2e8f0" stroke="#d1d9e0" stroke-width="1"/>
+
+                                <!-- Hombro izquierdo -->
+                                <circle class="robot-part robot-shoulder-left" cx="55" cy="140" r="8" fill="url(#cyanGradient)"/>
+
+                                <!-- Hombro derecho -->
+                                <circle class="robot-part robot-shoulder-right" cx="145" cy="140" r="8" fill="url(#cyanGradient)"/>
 
                                 <!-- Cuerpo -->
-                                <rect x="55" y="130" width="90" height="70" rx="15" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="2"/>
-
-                                <!-- Panel cyan del pecho -->
-                                <rect x="70" y="145" width="60" height="35" rx="8" fill="url(#cyanGradient)" opacity="0.8"/>
-
-                                <!-- Icono en el pecho -->
-                                <rect x="90" y="155" width="20" height="15" rx="3" fill="#f0f4f8" stroke="#008b8b" stroke-width="1.5"/>
-
-                                <!-- Hombros cyan -->
-                                <circle cx="55" cy="140" r="8" fill="url(#cyanGradient)"/>
-                                <circle cx="145" cy="140" r="8" fill="url(#cyanGradient)"/>
+                                <g class="robot-part robot-body">
+                                    <rect x="55" y="130" width="90" height="70" rx="15" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="2"/>
+                                    <rect x="70" y="145" width="60" height="35" rx="8" fill="url(#cyanGradient)" opacity="0.8"/>
+                                    <rect x="90" y="155" width="20" height="15" rx="3" fill="#f0f4f8" stroke="#008b8b" stroke-width="1.5"/>
+                                </g>
                             </svg>
                         </div>
                     </div>
@@ -416,7 +407,7 @@
                 </div>
 
                 <!-- Robot SVG Central -->
-                <div class="contact-robot" id="contactRobot">
+                <div class="contact-robot robot-interactive" id="contactRobot">
                     <svg class="contact-robot-svg" viewBox="0 0 300 380" aria-label="Robot asistente de contacto">
                         <defs>
                             <linearGradient id="cyanGradientContact" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -436,72 +427,66 @@
                             </filter>
                         </defs>
 
-                        <!-- Cabeza (forma redondeada grande) -->
-                        <ellipse cx="150" cy="70" rx="70" ry="60" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="2"/>
+                        <!-- Oreja izquierda -->
+                        <ellipse class="robot-part robot-ear-left" cx="70" cy="70" rx="15" ry="22" fill="url(#cyanGradientContact)"/>
 
-                        <!-- Línea decorativa cabeza -->
-                        <path d="M 95 30 Q 150 10, 205 30" fill="none" stroke="#d1d9e0" stroke-width="2"/>
+                        <!-- Oreja derecha -->
+                        <ellipse class="robot-part robot-ear-right" cx="230" cy="70" rx="15" ry="22" fill="url(#cyanGradientContact)"/>
 
-                        <!-- Orejas cyan -->
-                        <ellipse cx="70" cy="70" rx="15" ry="22" fill="url(#cyanGradientContact)"/>
-                        <ellipse cx="230" cy="70" rx="15" ry="22" fill="url(#cyanGradientContact)"/>
-
-                        <!-- Visor -->
-                        <rect x="90" y="45" width="120" height="60" rx="30" fill="url(#visorGradientContact)"/>
-
-                        <!-- Ojos -->
-                        <g class="robot-eyes-contact">
-                            <!-- Ojo izquierdo -->
-                            <circle cx="125" cy="75" r="20" fill="#006666" stroke="#004d4d" stroke-width="2"/>
-                            <circle cx="125" cy="75" r="15" fill="#00d4d4" filter="url(#eyeGlowContact)" class="eye-iris-contact"/>
-                            <circle cx="120" cy="70" r="5" fill="white" opacity="0.9"/>
-
-                            <!-- Ojo derecho -->
-                            <circle cx="175" cy="75" r="20" fill="#006666" stroke="#004d4d" stroke-width="2"/>
-                            <circle cx="175" cy="75" r="15" fill="#00d4d4" filter="url(#eyeGlowContact)" class="eye-iris-contact"/>
-                            <circle cx="170" cy="70" r="5" fill="white" opacity="0.9"/>
+                        <!-- Cabeza -->
+                        <g class="robot-part robot-head">
+                            <ellipse cx="150" cy="70" rx="70" ry="60" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="2"/>
+                            <path d="M 95 30 Q 150 10, 205 30" fill="none" stroke="#d1d9e0" stroke-width="2"/>
+                            <rect x="90" y="45" width="120" height="60" rx="30" fill="url(#visorGradientContact)"/>
+                            <g class="robot-eyes-contact">
+                                <circle cx="125" cy="75" r="20" fill="#006666" stroke="#004d4d" stroke-width="2"/>
+                                <circle cx="125" cy="75" r="15" fill="#00d4d4" filter="url(#eyeGlowContact)" class="eye-iris-contact"/>
+                                <circle cx="120" cy="70" r="5" fill="white" opacity="0.9"/>
+                                <circle cx="175" cy="75" r="20" fill="#006666" stroke="#004d4d" stroke-width="2"/>
+                                <circle cx="175" cy="75" r="15" fill="#00d4d4" filter="url(#eyeGlowContact)" class="eye-iris-contact"/>
+                                <circle cx="170" cy="70" r="5" fill="white" opacity="0.9"/>
+                            </g>
                         </g>
 
-
                         <!-- Cuello -->
-                        <rect x="130" y="128" width="40" height="15" rx="4" fill="#e2e8f0" stroke="#d1d9e0" stroke-width="1"/>
+                        <rect class="robot-part robot-neck" x="130" y="128" width="40" height="15" rx="4" fill="#e2e8f0" stroke="#d1d9e0" stroke-width="1"/>
+
+                        <!-- Brazo izquierdo -->
+                        <g class="robot-part robot-arm-left">
+                            <circle cx="90" cy="155" r="12" fill="url(#cyanGradientContact)"/>
+                            <rect x="60" y="160" width="18" height="50" rx="9" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="1"/>
+                            <circle cx="69" cy="215" r="12" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="1"/>
+                        </g>
+
+                        <!-- Brazo derecho -->
+                        <g class="robot-part robot-arm-right">
+                            <circle cx="210" cy="155" r="12" fill="url(#cyanGradientContact)"/>
+                            <rect x="222" y="160" width="18" height="50" rx="9" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="1"/>
+                            <circle cx="231" cy="215" r="12" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="1"/>
+                        </g>
 
                         <!-- Cuerpo -->
-                        <rect x="90" y="143" width="120" height="100" rx="20" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="2"/>
+                        <g class="robot-part robot-body">
+                            <rect x="90" y="143" width="120" height="100" rx="20" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="2"/>
+                            <rect x="110" y="160" width="80" height="50" rx="10" fill="url(#cyanGradientContact)" opacity="0.8"/>
+                            <text x="150" y="198" text-anchor="middle" fill="#f0f4f8" font-size="32" font-weight="bold">?</text>
+                        </g>
 
-                        <!-- Panel cyan pecho -->
-                        <rect x="110" y="160" width="80" height="50" rx="10" fill="url(#cyanGradientContact)" opacity="0.8"/>
+                        <!-- Pierna izquierda -->
+                        <g class="robot-part robot-leg-left">
+                            <rect x="110" y="243" width="25" height="70" rx="10" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="1"/>
+                            <ellipse cx="122" cy="280" rx="8" ry="6" fill="url(#cyanGradientContact)"/>
+                            <ellipse cx="122" cy="320" rx="22" ry="12" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="1"/>
+                            <rect x="108" y="325" width="28" height="8" rx="4" fill="url(#cyanGradientContact)"/>
+                        </g>
 
-                        <!-- Icono interrogación en pecho -->
-                        <text x="150" y="198" text-anchor="middle" fill="#f0f4f8" font-size="32" font-weight="bold">?</text>
-
-                        <!-- Hombros cyan -->
-                        <circle cx="90" cy="155" r="12" fill="url(#cyanGradientContact)"/>
-                        <circle cx="210" cy="155" r="12" fill="url(#cyanGradientContact)"/>
-
-                        <!-- Brazos -->
-                        <rect x="60" y="160" width="18" height="50" rx="9" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="1"/>
-                        <rect x="222" y="160" width="18" height="50" rx="9" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="1"/>
-
-                        <!-- Manos -->
-                        <circle cx="69" cy="215" r="12" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="1"/>
-                        <circle cx="231" cy="215" r="12" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="1"/>
-
-                        <!-- Piernas -->
-                        <rect x="110" y="243" width="25" height="70" rx="10" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="1"/>
-                        <rect x="165" y="243" width="25" height="70" rx="10" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="1"/>
-
-                        <!-- Rodillas cyan -->
-                        <ellipse cx="122" cy="280" rx="8" ry="6" fill="url(#cyanGradientContact)"/>
-                        <ellipse cx="178" cy="280" rx="8" ry="6" fill="url(#cyanGradientContact)"/>
-
-                        <!-- Pies -->
-                        <ellipse cx="122" cy="320" rx="22" ry="12" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="1"/>
-                        <ellipse cx="178" cy="320" rx="22" ry="12" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="1"/>
-
-                        <!-- Detalles pies cyan -->
-                        <rect x="108" y="325" width="28" height="8" rx="4" fill="url(#cyanGradientContact)"/>
-                        <rect x="164" y="325" width="28" height="8" rx="4" fill="url(#cyanGradientContact)"/>
+                        <!-- Pierna derecha -->
+                        <g class="robot-part robot-leg-right">
+                            <rect x="165" y="243" width="25" height="70" rx="10" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="1"/>
+                            <ellipse cx="178" cy="280" rx="8" ry="6" fill="url(#cyanGradientContact)"/>
+                            <ellipse cx="178" cy="320" rx="22" ry="12" fill="#f0f4f8" stroke="#d1d9e0" stroke-width="1"/>
+                            <rect x="164" y="325" width="28" height="8" rx="4" fill="url(#cyanGradientContact)"/>
+                        </g>
                     </svg>
 
                     <!-- Burbuja de diálogo (funciona como título) -->
