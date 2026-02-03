@@ -123,21 +123,17 @@
                                 <!-- Visor (área de los ojos) -->
                                 <rect x="55" y="50" width="90" height="50" rx="25" fill="url(#visorGradient)"/>
 
-                                <!-- Ojos -->
+                                <!-- Ojos estilo Eilik (arcos felices) -->
                                 <g class="robot-eyes">
-                                    <!-- Ojo izquierdo -->
-                                    <circle cx="80" cy="75" r="16" fill="#006666" stroke="#004d4d" stroke-width="2"/>
-                                    <circle cx="80" cy="75" r="12" fill="#00d4d4" filter="url(#eyeGlow)" class="eye-iris"/>
-                                    <circle cx="76" cy="71" r="4" fill="white" opacity="0.9" class="eye-reflection"/>
+                                    <!-- Ojo izquierdo - arco curvo feliz -->
+                                    <path d="M 65 82 Q 80 62, 95 82" fill="none" stroke="#006666" stroke-width="12" stroke-linecap="round"/>
+                                    <path d="M 67 82 Q 80 65, 93 82" fill="none" stroke="#00d4d4" stroke-width="8" stroke-linecap="round" filter="url(#eyeGlow)" class="eye-iris"/>
 
-                                    <!-- Ojo derecho -->
-                                    <circle cx="120" cy="75" r="16" fill="#006666" stroke="#004d4d" stroke-width="2"/>
-                                    <circle cx="120" cy="75" r="12" fill="#00d4d4" filter="url(#eyeGlow)" class="eye-iris"/>
-                                    <circle cx="116" cy="71" r="4" fill="white" opacity="0.9" class="eye-reflection"/>
+                                    <!-- Ojo derecho - arco curvo feliz -->
+                                    <path d="M 105 82 Q 120 62, 135 82" fill="none" stroke="#006666" stroke-width="12" stroke-linecap="round"/>
+                                    <path d="M 107 82 Q 120 65, 133 82" fill="none" stroke="#00d4d4" stroke-width="8" stroke-linecap="round" filter="url(#eyeGlow)" class="eye-iris"/>
                                 </g>
 
-                                <!-- Boca (línea simple) -->
-                                <line x1="85" y1="108" x2="115" y2="108" stroke="#4a5568" stroke-width="3" stroke-linecap="round"/>
 
                                 <!-- Cuello -->
                                 <rect x="85" y="118" width="30" height="12" rx="3" fill="#e2e8f0" stroke="#d1d9e0" stroke-width="1"/>
@@ -451,21 +447,17 @@
                         <!-- Visor -->
                         <rect x="90" y="45" width="120" height="60" rx="30" fill="url(#visorGradientContact)"/>
 
-                        <!-- Ojos -->
+                        <!-- Ojos estilo Eilik (arcos felices) -->
                         <g class="robot-eyes-contact">
-                            <!-- Ojo izquierdo -->
-                            <circle cx="125" cy="75" r="20" fill="#006666" stroke="#004d4d" stroke-width="2"/>
-                            <circle cx="125" cy="75" r="15" fill="#00d4d4" filter="url(#eyeGlowContact)" class="eye-iris-contact"/>
-                            <circle cx="120" cy="70" r="5" fill="white" opacity="0.9"/>
+                            <!-- Ojo izquierdo - arco curvo feliz -->
+                            <path d="M 105 85 Q 125 55, 145 85" fill="none" stroke="#006666" stroke-width="16" stroke-linecap="round"/>
+                            <path d="M 108 85 Q 125 60, 142 85" fill="none" stroke="#00d4d4" stroke-width="10" stroke-linecap="round" filter="url(#eyeGlowContact)" class="eye-iris-contact"/>
 
-                            <!-- Ojo derecho -->
-                            <circle cx="175" cy="75" r="20" fill="#006666" stroke="#004d4d" stroke-width="2"/>
-                            <circle cx="175" cy="75" r="15" fill="#00d4d4" filter="url(#eyeGlowContact)" class="eye-iris-contact"/>
-                            <circle cx="170" cy="70" r="5" fill="white" opacity="0.9"/>
+                            <!-- Ojo derecho - arco curvo feliz -->
+                            <path d="M 155 85 Q 175 55, 195 85" fill="none" stroke="#006666" stroke-width="16" stroke-linecap="round"/>
+                            <path d="M 158 85 Q 175 60, 192 85" fill="none" stroke="#00d4d4" stroke-width="10" stroke-linecap="round" filter="url(#eyeGlowContact)" class="eye-iris-contact"/>
                         </g>
 
-                        <!-- Boca -->
-                        <line x1="130" y1="115" x2="170" y2="115" stroke="#4a5568" stroke-width="4" stroke-linecap="round"/>
 
                         <!-- Cuello -->
                         <rect x="130" y="128" width="40" height="15" rx="4" fill="#e2e8f0" stroke="#d1d9e0" stroke-width="1"/>
