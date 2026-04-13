@@ -202,28 +202,85 @@ function initializeScrollAnimations() {
 }
 
 // ===================================
-// Contact Form
+// Contact Form - Integrado con Sistema de Mensajes
 // ===================================
+const CONTACT_CONFIG = {
+    endpoint: '/api/contact',
+    destinatario: 'gibz.tech.corp@gmail.com'
+};
+
 function initializeContactForm() {
     const form = document.getElementById('contactForm');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalBtnContent = submitBtn.innerHTML;
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const formData = {
-            name: form.name.value,
-            email: form.email.value,
-            subject: form.subject.value,
-            message: form.message.value
+        // Deshabilitar boton y mostrar estado de carga
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>Enviando...</span><i class="fas fa-spinner fa-spin"></i>';
+
+        const data = {
+            to: CONTACT_CONFIG.destinatario,
+            subject: `[Portafolio] ${form.subject.value}`,
+            body: `
+                <h2>Nuevo mensaje de contacto</h2>
+                <p><strong>Nombre:</strong> ${form.name.value}</p>
+                <p><strong>Email:</strong> ${form.email.value}</p>
+                <p><strong>Asunto:</strong> ${form.subject.value}</p>
+                <hr>
+                <p>${form.message.value.replace(/\n/g, '<br>')}</p>
+            `
         };
 
-        // Here you would typically send this to a backend
-        console.log('Form submitted:', formData);
+        try {
+            const response = await fetch(CONTACT_CONFIG.endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
 
-        // Show success message (you can replace this with a modal or notification)
-        alert('¡Mensaje enviado exitosamente! Te responderé pronto.');
-        form.reset();
+            if (response.ok) {
+                showFormMessage('success', '¡Mensaje enviado exitosamente! Te responderé pronto.');
+                form.reset();
+            } else if (response.status === 429) {
+                showFormMessage('error', 'Demasiadas solicitudes. Intenta de nuevo en un minuto.');
+            } else {
+                showFormMessage('error', 'Error al enviar el mensaje. Intenta de nuevo.');
+            }
+        } catch (error) {
+            console.error('Error al enviar formulario:', error);
+            showFormMessage('error', 'Error de conexión. Por favor, intenta de nuevo.');
+        } finally {
+            // Restaurar estado del boton
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnContent;
+        }
     });
+}
+
+// Mostrar mensaje de exito/error en el formulario
+function showFormMessage(type, message) {
+    // Eliminar mensaje existente si hay
+    const existingMsg = document.querySelector('.form-message');
+    if (existingMsg) existingMsg.remove();
+
+    const msgElement = document.createElement('div');
+    msgElement.className = `form-message form-message-${type}`;
+    msgElement.innerHTML = `
+        <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+        <span>${message}</span>
+    `;
+
+    const form = document.getElementById('contactForm');
+    form.insertBefore(msgElement, form.firstChild);
+
+    // Auto-eliminar despues de 5 segundos
+    setTimeout(() => {
+        msgElement.classList.add('fade-out');
+        setTimeout(() => msgElement.remove(), 300);
+    }, 5000);
 }
 
 // ===================================
